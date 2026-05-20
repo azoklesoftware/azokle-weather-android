@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name" translatable="false">Azokle Weather</string>
+    <string name="app_company" translatable="false">Azokle Private Limited</string>
+    <string name="app_division" translatable="false">Azokle Software</string>
+    <string name="general_error_failed_to_download">Gagal mengunduh perkiraan. Hubungkan ke Internet dan coba lagi.</string>
+    <string name="general_error_outdated">Data perkiraan Anda telah kedaluwarsa. Hubungkan ke Internet dan coba lagi.</string>
+    <string name="general_error_no_selected_place">Tidak ada tempat yang dipilih.</string>
+    <string name="general_btn_try_again">Coba lagi</string>
+    <string name="general_btn_select_place">Pilih tempat</string>
+    <string name="general_btn_dialog_confirm">OKE</string>
+    <string name="general_btn_dialog_cancel">Membatalkan</string>
+
+    <string name="credit_weather">Data cuaca oleh Open-Meteo.com</string>
+    <string name="credit_geocoding">Data geocoding oleh Open-Meteo.com</string>
+
+    <string name="place_picker_hint_search">Cari tempat…</string>
+    <string name="place_picker_title_saved_places">Tempat yang disimpan</string>
+    <string name="place_picker_title_search_results">Hasil pencarian</string>
+    <string name="place_picker_error_no_internet">Anda tampaknya sedang offline. Hubungkan ke Internet dan coba lagi.</string>
+    <string name="place_picker_error_value_no_results_for">Tidak ada hasil untuk \"%s\".</string>
+    <string name="place_picker_error_no_saved_places">Tidak ada tempat yang disimpan.</string>
+    <string name="delete_place_value">Hapus%s?</string>
+    <string name="delete_place_description">Tindakan ini juga akan menghapus data perkiraan yang di-cache.</string>
+
+    <string name="cond_screen_title">Kondisi</string>
+    <string name="cond_screen_pop">Peluang Curah Hujan</string>
+    <string name="cond_screen_precip">Total Curah Hujan</string>
+    <string name="cond_screen_temp_unit_celsius">Celcius (°C)</string>
+    <string name="cond_screen_temp_unit_fahrenheit">Fahrenheit (°F)</string>
+    <string name="cond_screen_precip_value_in_last_hours">%sjam terakhir</string>
+    <string name="cond_screen_precip_value_in_next_hours">%sjam berikutnya</string>
+
+    <string name="settings_screen_title">Pengaturan</string>
+    <string name="settings_screen_title_units">Satuan</string>
+    <string name="settings_screen_title_temp_unit">Suhu</string>
+    <string name="settings_screen_label_temp_unit_celsius">Derajat Celcius</string>
+    <string name="settings_screen_label_temp_unit_fahrenheit">Derajat Fahrenheit</string>
+    <string name="settings_screen_title_wind_unit">Angin</string>
+    <string name="settings_screen_label_wind_unit_mps">Meter per detik</string>
+    <string name="settings_screen_label_wind_unit_kph">Kilometer per jam</string>
+    <string name="settings_screen_label_wind_unit_mph">Mil per jam</string>
+    <string name="settings_screen_label_wind_unit_kn">simpul</string>
+    <string name="settings_screen_title_precip_unit">Pengendapan</string>
+    <string name="settings_screen_title_rain_unit">Hujan</string>
+    <string name="settings_screen_title_showers_unit">Hujan</string>
+    <string name="settings_screen_title_snow_unit">Salju</string>
+    <string name="settings_screen_label_precip_unit_mm">milimeter</string>
+    <string name="settings_screen_label_precip_unit_cm">Sentimeter</string>
+    <string name="settings_screen_label_precip_unit_in">inci</string>
+    <string name="settings_screen_title_pressure_unit">Tekanan</string>
+    <string name="settings_screen_label_pressure_unit_hpa">Hektopascal</string>
+    <string name="settings_screen_label_pressure_unit_inhg">inci air raksa</string>
+    <string name="settings_screen_label_pressure_unit_mmhg">Milimeter air raksa</string>
+    <string name="settings_screen_title_vis_unit">Visibilitas</string>
+    <string name="settings_screen_label_vis_unit_km">Kilometer</string>
+    <string name="settings_screen_label_vis_unit_mi">mil</string>
+    <string name="settings_screen_label_vis_unit_m">Meter</string>
+    <string name="settings_screen_label_vis_unit_ft">Kaki</string>
+    <string name="settings_screen_title_appearance">Penampilan</string>
+    <string name="settings_screen_title_theme">Tema</string>
+    <string name="settings_screen_label_dark">Gelap</string>
+    <string name="settings_screen_label_light">Lampu</string>
+    <string name="settings_screen_label_follow_system">Ikuti sistem</string>
+
+    <string name="date_time_now">Sekarang</string>
+    <string name="date_time_today">Hari ini</string>
+    <string name="date_time_pattern_hour">HH</string>
+    <string name="date_time_pattern_hour_minute">HH:mm</string>
+    <string name="date_time_pattern_dow">E</string>
+    <string name="date_time_pattern_dow_hour_minute">E, HH:mm</string>
+
+    <string name="precip_mixed">Pengendapan</string>
+    <string name="precip_rain">Hujan</string>
+    <string name="precip_showers">Hujan</string>
+    <string name="precip_snow">Salju</string>
+    <string name="precip_value_in_last_hours">Pada%sterakhir h</string>
+    <string name="precip_value_showers_in_next_hours">Hujan%1$sdiperkirakan terjadi pada%2$sberikutnya h.</string>
+    <string name="precip_value_rain_in_next_hours">%1$sdiperkirakan akan turun hujan pada%2$sberikutnya h.</string>
+    <string name="precip_value_snow_in_next_hours">%1$sdiperkirakan turun salju pada%2$sberikutnya h.</string>
+    <string name="precip_value_mixed_in_next_hours">%1$sdiharapkan pada%2$sberikutnya h.</string>
+    <string name="precip_value_showers_on_day">Perkiraan berikutnya adalah hujan%1$spada%2$s.</string>
+    <string name="precip_value_rain_on_day">Perkiraan berikutnya adalah hujan%1$spada%2$s.</string>
+    <string name="precip_value_snow_on_day">Perkiraan berikutnya adalah salju%1$spada%2$s.</string>
+    <string name="precip_value_mixed_on_day">Yang diharapkan selanjutnya adalah%1$spada%2$s.</string>
+    <string name="precip_value_none_in_next_days">Tidak ada yang diharapkan pada%sberikutnya d.</string>
+    <string name="precip_unit_mm">mm</string>
+    <string name="precip_value_mm">%smm</string>
+    <string name="precip_unit_cm">cm</string>
+    <string name="precip_value_cm">%scm</string>
+    <string name="precip_unit_in">″</string>
+    <string name="precip_value_in">%s″</string>
+
+    <string name="pop_value_percent">%s%%</string>
+
+    <string name="pressure">Tekanan</string>
+    <string name="pressure_trend_falling">Jatuh</string>
+    <string name="pressure_trend_steady">Stabil</string>
+    <string name="pressure_trend_rising">Kenaikan</string>
+    <string name="pressure_value_average">Rata-rata :%s</string>
+    <string name="pressure_unit_hpa">hPa</string>
+    <string name="pressure_value_hpa">%shPa</string>
+    <string name="pressure_unit_inhg">dalamHg</string>
+    <string name="pressure_value_inhg">%sdalamHg</string>
+    <string name="pressure_unit_mmhg">mmHg</string>
+    <string name="pressure_value_mmhg">%smmHg</string>
+
+    <string name="humidity">Kelembaban</string>
+    <string name="humidity_value_percent">%s%%</string>
+
+    <string name="sunrise">Matahari terbit</string>
+    <string name="sunset">Matahari terbenam</string>
+    <string name="sunrise_value">Matahari terbit:%s</string>
+    <string name="sunset_value">Matahari terbenam:%s</string>
+    <string name="sunrise_not_today">Tidak ada matahari terbit hari ini.</string>
+    <string name="sunset_not_today">Tidak ada matahari terbenam hari ini.</string>
+    <string name="sunrise_value_more_than_days_away">&gt;%sd</string>
+    <string name="sunrise_value_more_than_hours_away">&gt;%sjam</string>
+    <string name="sunset_value_more_than_days_away">&gt;%sd</string>
+    <string name="sunset_value_more_than_hours_away">&gt;%sjam</string>
+
+    <string name="temp_value_degree">%s°</string>
+    <string name="dew_point_value_right_now">Titik embun saat ini adalah%s.</string>
+    <string name="feels_like">Terasa seperti</string>
+    <string name="feels_like_value">Terasa seperti%s</string>
+    <string name="feels_like_value_actual">%ssebenarnya</string>
+    <string name="feels_like_cooler_than_actual">Angin membuat suasana menjadi lebih sejuk.</string>
+    <string name="feels_like_colder_than_actual">Angin membuatnya terasa lebih dingin.</string>
+    <string name="feels_like_warmer_than_actual">Kelembapan membuatnya terasa lebih hangat.</string>
+    <string name="feels_like_hotter_than_actual">Kelembapan membuat udara terasa lebih panas.</string>
+    <string name="feels_like_similar_to_actual">Mirip dengan suhu sebenarnya.</string>
+
+    <string name="uv_index">Indeks UV</string>
+    <string name="uv_index_risk_low">Rendah</string>
+    <string name="uv_index_risk_moderate">Sedang</string>
+    <string name="uv_index_risk_high">Tinggi</string>
+    <string name="uv_index_risk_very_high">Sangat tinggi</string>
+    <string name="uv_index_risk_extreme">Ekstrim</string>
+    <string name="uv_index_protection_value_from_until">Gunakan tabir surya%1$s-%2$s.</string>
+    <string name="uv_index_protection_value_from">Gunakan pelindung sinar matahari dari%s.</string>
+    <string name="uv_index_protection_value_until">Gunakan tabir surya sampai%s.</string>
+    <string name="uv_index_protection_value_until_end_of_day">Gunakan pelindung sinar matahari sepanjang hari.</string>
+    <string name="uv_index_protection_value_none">Rendah untuk sisa hari itu.</string>
+
+    <string name="vis">Visibilitas</string>
+    <string name="vis_unit_m">M</string>
+    <string name="vis_value_m">%sm</string>
+    <string name="vis_unit_ft">kaki</string>
+    <string name="vis_value_ft">%sft</string>
+    <string name="vis_unit_km">km</string>
+    <string name="vis_value_km">%skm</string>
+    <string name="vis_unit_mi">mi</string>
+    <string name="vis_value_mi">%smil</string>
+    <string name="vis_description_perfect">Pemandangan yang sangat jelas.</string>
+    <string name="vis_description_clear">Pandangan yang jelas.</string>
+    <string name="vis_description_fair">Pemandangan cukup jelas.</string>
+    <string name="vis_description_low">Pandangan terhalang.</string>
+    <string name="vis_description_very_low">Pandangan sangat terhambat.</string>
+
+    <string name="wind_label">Angin</string>
+    <string name="wind_bft_0">Tenang</string>
+    <string name="wind_bft_1">Udara ringan</string>
+    <string name="wind_bft_2">Angin sepoi-sepoi</string>
+    <string name="wind_bft_3">Angin sepoi-sepoi</string>
+    <string name="wind_bft_4">Angin sepoi-sepoi</string>
+    <string name="wind_bft_5">Angin segar</string>
+    <string name="wind_bft_6">Angin kencang</string>
+    <string name="wind_bft_7">Dekat angin kencang</string>
+    <string name="wind_bft_8">Angin kencang segar</string>
+    <string name="wind_bft_9">Angin kencang</string>
+    <string name="wind_bft_10">Seluruh badai</string>
+    <string name="wind_bft_11">Badai yang dahsyat</string>
+    <string name="wind_bft_12">Kekuatan badai</string>
+    <string name="wind_value_gusts_at">Hembusan angin di%s.</string>
+    <string name="wind_unit_mps">MS</string>
+    <string name="wind_value_mps">%sm/s</string>
+    <string name="wind_unit_kph">km/jam</string>
+    <string name="wind_value_kph">%skm/jam</string>
+    <string name="wind_unit_kn">buku</string>
+    <string name="wind_value_kn">%sbuku</string>
+    <string name="wind_unit_mph">mi/jam</string>
+    <string name="wind_value_mph">%smil/jam</string>
+
+    <string name="wmo_0">Jernih</string>
+    <string name="wmo_1">Sebagian besar jelas</string>
+    <string name="wmo_2">Sebagian berawan</string>
+    <string name="wmo_3">Mendung</string>
+    <string name="wmo_45">Kabut</string>
+    <string name="wmo_48">Menyimpan kabut waktu</string>
+    <string name="wmo_51">Gerimis ringan</string>
+    <string name="wmo_53">Gerimis</string>
+    <string name="wmo_55">Gerimis lebat</string>
+    <string name="wmo_56">Gerimis ringan yang membekukan</string>
+    <string name="wmo_57">Gerimis yang sangat dingin</string>
+    <string name="wmo_61">Hujan ringan</string>
+    <string name="wmo_63">Hujan</string>
+    <string name="wmo_65">Hujan lebat</string>
+    <string name="wmo_66">Hujan ringan yang membekukan</string>
+    <string name="wmo_67">Hujan deras yang membekukan</string>
+    <string name="wmo_71">Salju tipis</string>
+    <string name="wmo_73">Salju</string>
+    <string name="wmo_75">Salju lebat</string>
+    <string name="wmo_77">Butir salju</string>
+    <string name="wmo_80">Hujan ringan</string>
+    <string name="wmo_81">Hujan</string>
+    <string name="wmo_82">Hujan deras</string>
+    <string name="wmo_85">Hujan salju ringan</string>
+    <string name="wmo_86">Hujan salju lebat</string>
+    <string name="wmo_95">Hujan badai</string>
+    <string name="wmo_96">Badai petir disertai hujan es ringan</string>
+    <string name="wmo_99">Badai petir disertai hujan es lebat</string>
+</resources>

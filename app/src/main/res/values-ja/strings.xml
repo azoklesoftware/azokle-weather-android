@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name" translatable="false">Azokle Weather</string>
+    <string name="app_company" translatable="false">Azokle Private Limited</string>
+    <string name="app_division" translatable="false">Azokle Software</string>
+    <string name="general_error_failed_to_download">予測のダウンロードに失敗しました。インターネットに接続して、もう一度試してください。</string>
+    <string name="general_error_outdated">予測データの有効期限が切れています。インターネットに接続して、もう一度試してください。</string>
+    <string name="general_error_no_selected_place">選択された場所がありません。</string>
+    <string name="general_btn_try_again">もう一度やり直してください</string>
+    <string name="general_btn_select_place">場所を選択してください</string>
+    <string name="general_btn_dialog_confirm">わかりました</string>
+    <string name="general_btn_dialog_cancel">キャンセル</string>
+
+    <string name="credit_weather">Open-Meteo.com による気象データ</string>
+    <string name="credit_geocoding">Open-Meteo.com によるデータのジオコーディング</string>
+
+    <string name="place_picker_hint_search">場所を検索…</string>
+    <string name="place_picker_title_saved_places">保存された場所</string>
+    <string name="place_picker_title_search_results">検索結果</string>
+    <string name="place_picker_error_no_internet">オフラインのようです。インターネットに接続して、もう一度試してください。</string>
+    <string name="place_picker_error_value_no_results_for">「%s」の結果はありません。</string>
+    <string name="place_picker_error_no_saved_places">保存された場所はありません。</string>
+    <string name="delete_place_value">%sを削除しますか?</string>
+    <string name="delete_place_description">これにより、キャッシュされた予測データも削除されます。</string>
+
+    <string name="cond_screen_title">条件</string>
+    <string name="cond_screen_pop">降水確率</string>
+    <string name="cond_screen_precip">降水量の合計</string>
+    <string name="cond_screen_temp_unit_celsius">摂氏 (°C)</string>
+    <string name="cond_screen_temp_unit_fahrenheit">華氏 (°F)</string>
+    <string name="cond_screen_precip_value_in_last_hours">過去%s時間</string>
+    <string name="cond_screen_precip_value_in_next_hours">次の%s時間</string>
+
+    <string name="settings_screen_title">設定</string>
+    <string name="settings_screen_title_units">単位</string>
+    <string name="settings_screen_title_temp_unit">温度</string>
+    <string name="settings_screen_label_temp_unit_celsius">摂氏</string>
+    <string name="settings_screen_label_temp_unit_fahrenheit">華氏度</string>
+    <string name="settings_screen_title_wind_unit">風</string>
+    <string name="settings_screen_label_wind_unit_mps">メートル/秒</string>
+    <string name="settings_screen_label_wind_unit_kph">時速キロメートル</string>
+    <string name="settings_screen_label_wind_unit_mph">時速マイル</string>
+    <string name="settings_screen_label_wind_unit_kn">結び目</string>
+    <string name="settings_screen_title_precip_unit">降水量</string>
+    <string name="settings_screen_title_rain_unit">雨</string>
+    <string name="settings_screen_title_showers_unit">シャワー</string>
+    <string name="settings_screen_title_snow_unit">雪</string>
+    <string name="settings_screen_label_precip_unit_mm">ミリメートル</string>
+    <string name="settings_screen_label_precip_unit_cm">センチメートル</string>
+    <string name="settings_screen_label_precip_unit_in">インチ</string>
+    <string name="settings_screen_title_pressure_unit">プレッシャー</string>
+    <string name="settings_screen_label_pressure_unit_hpa">ヘクトパスカル</string>
+    <string name="settings_screen_label_pressure_unit_inhg">水銀柱インチ</string>
+    <string name="settings_screen_label_pressure_unit_mmhg">水銀柱ミリメートル</string>
+    <string name="settings_screen_title_vis_unit">可視性</string>
+    <string name="settings_screen_label_vis_unit_km">キロメートル</string>
+    <string name="settings_screen_label_vis_unit_mi">マイル</string>
+    <string name="settings_screen_label_vis_unit_m">メートル</string>
+    <string name="settings_screen_label_vis_unit_ft">足</string>
+    <string name="settings_screen_title_appearance">外観</string>
+    <string name="settings_screen_title_theme">テーマ</string>
+    <string name="settings_screen_label_dark">暗い</string>
+    <string name="settings_screen_label_light">ライト</string>
+    <string name="settings_screen_label_follow_system">フォローシステム</string>
+
+    <string name="date_time_now">今</string>
+    <string name="date_time_today">今日</string>
+    <string name="date_time_pattern_hour">HH</string>
+    <string name="date_time_pattern_hour_minute">高さ:mm</string>
+    <string name="date_time_pattern_dow">E</string>
+    <string name="date_time_pattern_dow_hour_minute">E、高さ:mm</string>
+
+    <string name="precip_mixed">降水量</string>
+    <string name="precip_rain">雨</string>
+    <string name="precip_showers">シャワー</string>
+    <string name="precip_snow">雪</string>
+    <string name="precip_value_in_last_hours">最後の%sh</string>
+    <string name="precip_value_showers_in_next_hours">次の%2$s時間には、%1$sの雨が予想されます。</string>
+    <string name="precip_value_rain_in_next_hours">次の%2$s時間には%1$sの雨が予想されます。</string>
+    <string name="precip_value_snow_in_next_hours">%1$s次の%2$s時間には雪が予想されます。</string>
+    <string name="precip_value_mixed_in_next_hours">%1$sは次の%2$sh に予想されます。</string>
+    <string name="precip_value_showers_on_day">次に予想されるのは、%2$s上の%1$sシャワーです。</string>
+    <string name="precip_value_rain_on_day">次に予想されるのは、%2$sに%1$sの雨です。</string>
+    <string name="precip_value_snow_on_day">次に予想されるのは、%2$s上の%1$sの雪です。</string>
+    <string name="precip_value_mixed_on_day">次に予想されるのは、%2$s上の%1$sです。</string>
+    <string name="precip_value_none_in_next_days">次の%sでは何も期待されません。 d.</string>
+    <string name="precip_unit_mm">mm</string>
+    <string name="precip_value_mm">%smm</string>
+    <string name="precip_unit_cm">cm</string>
+    <string name="precip_value_cm">%scm</string>
+    <string name="precip_unit_in">”</string>
+    <string name="precip_value_in">%s\'\'</string>
+
+    <string name="pop_value_percent">%s%%</string>
+
+    <string name="pressure">プレッシャー</string>
+    <string name="pressure_trend_falling">落ちる</string>
+    <string name="pressure_trend_steady">安定した</string>
+    <string name="pressure_trend_rising">上昇中</string>
+    <string name="pressure_value_average">平均:%s</string>
+    <string name="pressure_unit_hpa">hPa</string>
+    <string name="pressure_value_hpa">%shPa</string>
+    <string name="pressure_unit_inhg">インチHg</string>
+    <string name="pressure_value_inhg">%sinHg</string>
+    <string name="pressure_unit_mmhg">mmHg</string>
+    <string name="pressure_value_mmhg">%smmHg</string>
+
+    <string name="humidity">湿度</string>
+    <string name="humidity_value_percent">%s%%</string>
+
+    <string name="sunrise">日の出</string>
+    <string name="sunset">日没</string>
+    <string name="sunrise_value">日の出:%s</string>
+    <string name="sunset_value">日没:%s</string>
+    <string name="sunrise_not_today">今日は日の出がありません。</string>
+    <string name="sunset_not_today">今日は夕焼けがありません。</string>
+    <string name="sunrise_value_more_than_days_away">&gt;%sd</string>
+    <string name="sunrise_value_more_than_hours_away">&gt;%sh</string>
+    <string name="sunset_value_more_than_days_away">&gt;%sd</string>
+    <string name="sunset_value_more_than_hours_away">&gt;%sh</string>
+
+    <string name="temp_value_degree">%s°</string>
+    <string name="dew_point_value_right_now">現在の露点は%sです。</string>
+    <string name="feels_like">みたいな感じ</string>
+    <string name="feels_like_value">%sのような感じ</string>
+    <string name="feels_like_value_actual">実際の%s</string>
+    <string name="feels_like_cooler_than_actual">風が吹くと涼しく感じられます。</string>
+    <string name="feels_like_colder_than_actual">風が吹くとさらに寒く感じられます。</string>
+    <string name="feels_like_warmer_than_actual">湿気のおかげで暖かく感じられます。</string>
+    <string name="feels_like_hotter_than_actual">湿気のせいでさらに暑く感じられます。</string>
+    <string name="feels_like_similar_to_actual">実際の温度と同様です。</string>
+
+    <string name="uv_index">紫外線指数</string>
+    <string name="uv_index_risk_low">低い</string>
+    <string name="uv_index_risk_moderate">適度</string>
+    <string name="uv_index_risk_high">高い</string>
+    <string name="uv_index_risk_very_high">非常に高い</string>
+    <string name="uv_index_risk_extreme">過激</string>
+    <string name="uv_index_protection_value_from_until">日焼け止め%1$s～%2$sを使用してください。</string>
+    <string name="uv_index_protection_value_from">%sの日焼け止めを使用してください。</string>
+    <string name="uv_index_protection_value_until">%sまでは日焼け止めを使用してください。</string>
+    <string name="uv_index_protection_value_until_end_of_day">残りの時間は日焼け止めを使用してください。</string>
+    <string name="uv_index_protection_value_none">その日の残りの時間は低いです。</string>
+
+    <string name="vis">可視性</string>
+    <string name="vis_unit_m">メートル</string>
+    <string name="vis_value_m">%sm</string>
+    <string name="vis_unit_ft">フィート</string>
+    <string name="vis_value_ft">%sフィート</string>
+    <string name="vis_unit_km">km</string>
+    <string name="vis_value_km">%skm</string>
+    <string name="vis_unit_mi">私</string>
+    <string name="vis_value_mi">%sマイル</string>
+    <string name="vis_description_perfect">完璧にクリアな視界。</string>
+    <string name="vis_description_clear">クリアな視界。</string>
+    <string name="vis_description_fair">かなりクリアな視界。</string>
+    <string name="vis_description_low">遮られた視界。</string>
+    <string name="vis_description_very_low">非常に視界が遮られます。</string>
+
+    <string name="wind_label">風</string>
+    <string name="wind_bft_0">落ち着いた</string>
+    <string name="wind_bft_1">軽い空気</string>
+    <string name="wind_bft_2">そよ風</string>
+    <string name="wind_bft_3">そよ風</string>
+    <string name="wind_bft_4">適度な風</string>
+    <string name="wind_bft_5">さわやかな風</string>
+    <string name="wind_bft_6">強い風</string>
+    <string name="wind_bft_7">強風付近</string>
+    <string name="wind_bft_8">フレッシュな強風</string>
+    <string name="wind_bft_9">強い強風</string>
+    <string name="wind_bft_10">全体の強風</string>
+    <string name="wind_bft_11">激しい嵐</string>
+    <string name="wind_bft_12">ハリケーンの力</string>
+    <string name="wind_value_gusts_at">%sで突風。</string>
+    <string name="wind_unit_mps">MS</string>
+    <string name="wind_value_mps">%sm/s</string>
+    <string name="wind_unit_kph">km/h</string>
+    <string name="wind_value_kph">%skm/h</string>
+    <string name="wind_unit_kn">知っている</string>
+    <string name="wind_value_kn">%skn</string>
+    <string name="wind_unit_mph">マイル/時</string>
+    <string name="wind_value_mph">%sマイル/時</string>
+
+    <string name="wmo_0">クリア</string>
+    <string name="wmo_1">ほとんど透明</string>
+    <string name="wmo_2">所により曇り</string>
+    <string name="wmo_3">曇り</string>
+    <string name="wmo_45">霧</string>
+    <string name="wmo_48">霧氷の堆積</string>
+    <string name="wmo_51">小雨</string>
+    <string name="wmo_53">霧雨</string>
+    <string name="wmo_55">濃霧雨</string>
+    <string name="wmo_56">軽い氷点下の霧雨</string>
+    <string name="wmo_57">濃い霧雨</string>
+    <string name="wmo_61">小雨</string>
+    <string name="wmo_63">雨</string>
+    <string name="wmo_65">大雨</string>
+    <string name="wmo_66">冷たい雨が降る</string>
+    <string name="wmo_67">激しい氷雨</string>
+    <string name="wmo_71">小雪</string>
+    <string name="wmo_73">雪</string>
+    <string name="wmo_75">大雪</string>
+    <string name="wmo_77">雪の粒</string>
+    <string name="wmo_80">軽いにわか雨</string>
+    <string name="wmo_81">シャワー</string>
+    <string name="wmo_82">激しいにわか雨</string>
+    <string name="wmo_85">小雪が降る</string>
+    <string name="wmo_86">大雪のにわか雨</string>
+    <string name="wmo_95">雷雨</string>
+    <string name="wmo_96">軽いひょうを伴う雷雨</string>
+    <string name="wmo_99">激しいひょうを伴う雷雨</string>
+</resources>

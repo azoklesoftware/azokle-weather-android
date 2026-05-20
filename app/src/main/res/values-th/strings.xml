@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name" translatable="false">Azokle Weather</string>
+    <string name="app_company" translatable="false">Azokle Private Limited</string>
+    <string name="app_division" translatable="false">Azokle Software</string>
+    <string name="general_error_failed_to_download">ดาวน์โหลดการคาดการณ์ไม่สำเร็จ เชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
+    <string name="general_error_outdated">ข้อมูลการคาดการณ์ของคุณหมดอายุแล้ว เชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
+    <string name="general_error_no_selected_place">ไม่ได้เลือกสถานที่</string>
+    <string name="general_btn_try_again">ลองอีกครั้ง</string>
+    <string name="general_btn_select_place">เลือกสถานที่</string>
+    <string name="general_btn_dialog_confirm">ตกลง</string>
+    <string name="general_btn_dialog_cancel">ยกเลิก</string>
+
+    <string name="credit_weather">ข้อมูลสภาพอากาศโดย Open-Meteo.com</string>
+    <string name="credit_geocoding">ข้อมูลการเข้ารหัสทางภูมิศาสตร์โดย Open-Meteo.com</string>
+
+    <string name="place_picker_hint_search">ค้นหาสถานที่...</string>
+    <string name="place_picker_title_saved_places">สถานที่ที่บันทึกไว้</string>
+    <string name="place_picker_title_search_results">ผลการค้นหา</string>
+    <string name="place_picker_error_no_internet">ดูเหมือนคุณจะออฟไลน์ เชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง</string>
+    <string name="place_picker_error_value_no_results_for">ไม่มีผลลัพธ์สำหรับ \"%s\"</string>
+    <string name="place_picker_error_no_saved_places">ไม่มีสถานที่ที่บันทึกไว้</string>
+    <string name="delete_place_value">ลบ%s?</string>
+    <string name="delete_place_description">การดำเนินการนี้จะลบข้อมูลการคาดการณ์ที่แคชไว้ด้วย</string>
+
+    <string name="cond_screen_title">เงื่อนไข</string>
+    <string name="cond_screen_pop">มีโอกาสเกิดฝนตก</string>
+    <string name="cond_screen_precip">ผลรวมปริมาณน้ำฝน</string>
+    <string name="cond_screen_temp_unit_celsius">เซลเซียส (°C)</string>
+    <string name="cond_screen_temp_unit_fahrenheit">ฟาเรนไฮต์ (°F)</string>
+    <string name="cond_screen_precip_value_in_last_hours">%sชั่วโมงล่าสุด</string>
+    <string name="cond_screen_precip_value_in_next_hours">%sชั่วโมงถัดไป</string>
+
+    <string name="settings_screen_title">การตั้งค่า</string>
+    <string name="settings_screen_title_units">หน่วย</string>
+    <string name="settings_screen_title_temp_unit">อุณหภูมิ</string>
+    <string name="settings_screen_label_temp_unit_celsius">องศาเซลเซียส</string>
+    <string name="settings_screen_label_temp_unit_fahrenheit">องศาฟาเรนไฮต์</string>
+    <string name="settings_screen_title_wind_unit">ลม</string>
+    <string name="settings_screen_label_wind_unit_mps">เมตรต่อวินาที</string>
+    <string name="settings_screen_label_wind_unit_kph">Kilometers per hour</string>
+    <string name="settings_screen_label_wind_unit_mph">ไมล์ต่อชั่วโมง</string>
+    <string name="settings_screen_label_wind_unit_kn">นอต</string>
+    <string name="settings_screen_title_precip_unit">ปริมาณน้ำฝน</string>
+    <string name="settings_screen_title_rain_unit">ฝน</string>
+    <string name="settings_screen_title_showers_unit">อาบน้ำ</string>
+    <string name="settings_screen_title_snow_unit">หิมะ</string>
+    <string name="settings_screen_label_precip_unit_mm">มิลลิเมตร</string>
+    <string name="settings_screen_label_precip_unit_cm">เซนติเมตร</string>
+    <string name="settings_screen_label_precip_unit_in">นิ้ว</string>
+    <string name="settings_screen_title_pressure_unit">ความดัน</string>
+    <string name="settings_screen_label_pressure_unit_hpa">เฮกโตปาสคาล</string>
+    <string name="settings_screen_label_pressure_unit_inhg">ปรอท</string>
+    <string name="settings_screen_label_pressure_unit_mmhg">มิลลิเมตรปรอท</string>
+    <string name="settings_screen_title_vis_unit">การมองเห็น</string>
+    <string name="settings_screen_label_vis_unit_km">กิโลเมตร</string>
+    <string name="settings_screen_label_vis_unit_mi">ไมล์</string>
+    <string name="settings_screen_label_vis_unit_m">เมตร</string>
+    <string name="settings_screen_label_vis_unit_ft">เท้า</string>
+    <string name="settings_screen_title_appearance">รูปร่าง</string>
+    <string name="settings_screen_title_theme">ธีม</string>
+    <string name="settings_screen_label_dark">มืด</string>
+    <string name="settings_screen_label_light">แสงสว่าง</string>
+    <string name="settings_screen_label_follow_system">ติดตามระบบ</string>
+
+    <string name="date_time_now">ตอนนี้</string>
+    <string name="date_time_today">วันนี้</string>
+    <string name="date_time_pattern_hour">ฮฮ</string>
+    <string name="date_time_pattern_hour_minute">ฮช:มม</string>
+    <string name="date_time_pattern_dow">อี</string>
+    <string name="date_time_pattern_dow_hour_minute">E, HH:มม</string>
+
+    <string name="precip_mixed">ปริมาณน้ำฝน</string>
+    <string name="precip_rain">ฝน</string>
+    <string name="precip_showers">อาบน้ำ</string>
+    <string name="precip_snow">หิมะ</string>
+    <string name="precip_value_in_last_hours">ในช่วง%sชั่วโมงที่ผ่านมา</string>
+    <string name="precip_value_showers_in_next_hours">%1$sคาดว่าจะมีฝนตกชุกใน%2$sชั่วโมงถัดไป</string>
+    <string name="precip_value_rain_in_next_hours">%1$sคาดว่าจะมีฝนตกใน%2$sชั่วโมงถัดไป</string>
+    <string name="precip_value_snow_in_next_hours">%1$sคาดว่าจะมีหิมะใน%2$sชั่วโมงถัดไป</string>
+    <string name="precip_value_mixed_in_next_hours">คาดว่าจะเกิด%1$sใน%2$sชั่วโมงถัดไป</string>
+    <string name="precip_value_showers_on_day">คาดว่าต่อไปจะมีฝนฟ้าคะนอง%1$sบน%2$s</string>
+    <string name="precip_value_rain_on_day">คาดว่าต่อไปจะมีฝน%1$sบน%2$s</string>
+    <string name="precip_value_snow_on_day">คาดว่าต่อไปจะมีหิมะ%1$sบน%2$s</string>
+    <string name="precip_value_mixed_on_day">คาดว่าต่อไปคือ%1$sบน%2$s</string>
+    <string name="precip_value_none_in_next_days">คาดว่าจะไม่เกิดขึ้นใน%sd. ถัดไป</string>
+    <string name="precip_unit_mm">มม</string>
+    <string name="precip_value_mm">%sมม</string>
+    <string name="precip_unit_cm">ซม</string>
+    <string name="precip_value_cm">%sซม</string>
+    <string name="precip_unit_in">″</string>
+    <string name="precip_value_in">%s″</string>
+
+    <string name="pop_value_percent">%s%%</string>
+
+    <string name="pressure">ความดัน</string>
+    <string name="pressure_trend_falling">ล้ม</string>
+    <string name="pressure_trend_steady">มั่นคง</string>
+    <string name="pressure_trend_rising">เพิ่มขึ้น</string>
+    <string name="pressure_value_average">เฉลี่ย:%s</string>
+    <string name="pressure_unit_hpa">ฮปา</string>
+    <string name="pressure_value_hpa">%shPa</string>
+    <string name="pressure_unit_inhg">ในปรอท</string>
+    <string name="pressure_value_inhg">%sในปรอท</string>
+    <string name="pressure_unit_mmhg">มิลลิเมตรปรอท</string>
+    <string name="pressure_value_mmhg">%sมิลลิเมตรปรอท</string>
+
+    <string name="humidity">ความชื้น</string>
+    <string name="humidity_value_percent">%s%%</string>
+
+    <string name="sunrise">พระอาทิตย์ขึ้น</string>
+    <string name="sunset">พระอาทิตย์ตก</string>
+    <string name="sunrise_value">พระอาทิตย์ขึ้น:%s</string>
+    <string name="sunset_value">พระอาทิตย์ตก:%s</string>
+    <string name="sunrise_not_today">วันนี้ไม่มีพระอาทิตย์ขึ้น</string>
+    <string name="sunset_not_today">วันนี้ไม่มีพระอาทิตย์ตก</string>
+    <string name="sunrise_value_more_than_days_away">&gt;%sง</string>
+    <string name="sunrise_value_more_than_hours_away">&gt;%sชม</string>
+    <string name="sunset_value_more_than_days_away">&gt;%sง</string>
+    <string name="sunset_value_more_than_hours_away">&gt;%sชม</string>
+
+    <string name="temp_value_degree">%s°</string>
+    <string name="dew_point_value_right_now">จุดน้ำค้างอยู่ที่%sในขณะนี้</string>
+    <string name="feels_like">รู้สึกเหมือน</string>
+    <string name="feels_like_value">รู้สึกเหมือน%s</string>
+    <string name="feels_like_value_actual">%sจริง</string>
+    <string name="feels_like_cooler_than_actual">ลมทำให้รู้สึกเย็นลง</string>
+    <string name="feels_like_colder_than_actual">ลมทำให้รู้สึกเย็นลง</string>
+    <string name="feels_like_warmer_than_actual">ความชื้นทำให้รู้สึกอบอุ่นขึ้น</string>
+    <string name="feels_like_hotter_than_actual">ความชื้นทำให้รู้สึกร้อนขึ้น</string>
+    <string name="feels_like_similar_to_actual">คล้ายกับอุณหภูมิจริง</string>
+
+    <string name="uv_index">ดัชนีรังสียูวี</string>
+    <string name="uv_index_risk_low">ต่ำ</string>
+    <string name="uv_index_risk_moderate">ปานกลาง</string>
+    <string name="uv_index_risk_high">สูง</string>
+    <string name="uv_index_risk_very_high">สูงมาก</string>
+    <string name="uv_index_risk_extreme">สุดขีด</string>
+    <string name="uv_index_protection_value_from_until">ใช้ครีมกันแดด%1$s-%2$s</string>
+    <string name="uv_index_protection_value_from">ใช้ครีมกันแดดจาก%s</string>
+    <string name="uv_index_protection_value_until">ใช้ครีมกันแดดจนถึง%s</string>
+    <string name="uv_index_protection_value_until_end_of_day">ใช้ครีมกันแดดในช่วงที่เหลือของวัน</string>
+    <string name="uv_index_protection_value_none">ต่ำในช่วงที่เหลือของวัน</string>
+
+    <string name="vis">การมองเห็น</string>
+    <string name="vis_unit_m">ม</string>
+    <string name="vis_value_m">%sม</string>
+    <string name="vis_unit_ft">ฟุต</string>
+    <string name="vis_value_ft">%sฟุต</string>
+    <string name="vis_unit_km">กม</string>
+    <string name="vis_value_km">%sกม</string>
+    <string name="vis_unit_mi">ไมล์</string>
+    <string name="vis_value_mi">%sมิ.ย</string>
+    <string name="vis_description_perfect">มุมมองที่ชัดเจนสมบูรณ์แบบ</string>
+    <string name="vis_description_clear">มุมมองที่ชัดเจน</string>
+    <string name="vis_description_fair">วิวค่อนข้างชัดเจน</string>
+    <string name="vis_description_low">วิวถูกบดบัง.</string>
+    <string name="vis_description_very_low">บังวิวมาก.</string>
+
+    <string name="wind_label">ลม</string>
+    <string name="wind_bft_0">เงียบสงบ</string>
+    <string name="wind_bft_1">อากาศเบา</string>
+    <string name="wind_bft_2">ลมพัดเบาๆ</string>
+    <string name="wind_bft_3">สายลมอ่อนโยน</string>
+    <string name="wind_bft_4">ลมพัดปานกลาง</string>
+    <string name="wind_bft_5">สายลมสดชื่น</string>
+    <string name="wind_bft_6">ลมแรง</string>
+    <string name="wind_bft_7">ใกล้พายุ</string>
+    <string name="wind_bft_8">ลมสด</string>
+    <string name="wind_bft_9">ลมแรง</string>
+    <string name="wind_bft_10">พายุทั้ง</string>
+    <string name="wind_bft_11">พายุรุนแรง</string>
+    <string name="wind_bft_12">พลังพายุเฮอริเคน</string>
+    <string name="wind_value_gusts_at">ลมกระโชกที่%s</string>
+    <string name="wind_unit_mps">เมตร/วินาที</string>
+    <string name="wind_value_mps">%sเมตร/วินาที</string>
+    <string name="wind_unit_kph">กม./ชม</string>
+    <string name="wind_value_kph">%sกม./ชม</string>
+    <string name="wind_unit_kn">KN</string>
+    <string name="wind_value_kn">%skn</string>
+    <string name="wind_unit_mph">ไมล์/ชม</string>
+    <string name="wind_value_mph">%sไมล์/ชม</string>
+
+    <string name="wmo_0">ชัดเจน</string>
+    <string name="wmo_1">ชัดเจนเป็นส่วนใหญ่</string>
+    <string name="wmo_2">มีเมฆเป็นบางส่วน</string>
+    <string name="wmo_3">มืดครึ้ม</string>
+    <string name="wmo_45">หมอก</string>
+    <string name="wmo_48">ฝากหมอกหนาทึบ</string>
+    <string name="wmo_51">ฝนตกปรอยๆ</string>
+    <string name="wmo_53">ฝนตกปรอยๆ</string>
+    <string name="wmo_55">ฝนตกหนัก</string>
+    <string name="wmo_56">ฝนละอองเยือกแข็งเล็กน้อย</string>
+    <string name="wmo_57">ฝนละอองเยือกแข็ง</string>
+    <string name="wmo_61">ฝนตกปรอยๆ</string>
+    <string name="wmo_63">ฝน</string>
+    <string name="wmo_65">ฝนตกหนัก</string>
+    <string name="wmo_66">ฝนเยือกแข็งเล็กน้อย</string>
+    <string name="wmo_67">ฝนตกหนักหนาวจัด</string>
+    <string name="wmo_71">หิมะเบาบาง</string>
+    <string name="wmo_73">หิมะ</string>
+    <string name="wmo_75">หิมะตกหนัก</string>
+    <string name="wmo_77">เม็ดหิมะ</string>
+    <string name="wmo_80">ฝนตกปรอยๆ</string>
+    <string name="wmo_81">อาบน้ำ</string>
+    <string name="wmo_82">ฝนตกหนัก</string>
+    <string name="wmo_85">หิมะโปรยปรายเล็กน้อย</string>
+    <string name="wmo_86">หิมะตกหนัก</string>
+    <string name="wmo_95">พายุฝนฟ้าคะนอง</string>
+    <string name="wmo_96">พายุฝนฟ้าคะนองและมีลูกเห็บไม่รุนแรง</string>
+    <string name="wmo_99">พายุฝนฟ้าคะนองและลูกเห็บตกหนัก</string>
+</resources>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name" translatable="false">Azokle Weather</string>
+    <string name="app_company" translatable="false">Azokle Private Limited</string>
+    <string name="app_division" translatable="false">Azokle Software</string>
+    <string name="general_error_failed_to_download">예측을 다운로드하지 못했습니다. 인터넷에 연결하고 다시 시도해 보세요.</string>
+    <string name="general_error_outdated">예측 데이터가 만료되었습니다. 인터넷에 연결하고 다시 시도해 보세요.</string>
+    <string name="general_error_no_selected_place">선택한 장소가 없습니다.</string>
+    <string name="general_btn_try_again">다시 시도하세요</string>
+    <string name="general_btn_select_place">장소 선택</string>
+    <string name="general_btn_dialog_confirm">좋아요</string>
+    <string name="general_btn_dialog_cancel">취소</string>
+
+    <string name="credit_weather">Open-Meteo.com의 날씨 데이터</string>
+    <string name="credit_geocoding">Open-Meteo.com의 지오코딩 데이터</string>
+
+    <string name="place_picker_hint_search">장소 검색…</string>
+    <string name="place_picker_title_saved_places">저장된 장소</string>
+    <string name="place_picker_title_search_results">검색결과</string>
+    <string name="place_picker_error_no_internet">오프라인 상태인 것 같습니다. 인터넷에 연결하고 다시 시도해 보세요.</string>
+    <string name="place_picker_error_value_no_results_for">\"%s\"에 대한 검색결과가 없습니다.</string>
+    <string name="place_picker_error_no_saved_places">저장된 장소가 없습니다.</string>
+    <string name="delete_place_value">%s를 삭제하시겠습니까?</string>
+    <string name="delete_place_description">캐시된 예측 데이터도 삭제됩니다.</string>
+
+    <string name="cond_screen_title">정황</string>
+    <string name="cond_screen_pop">강수확률</string>
+    <string name="cond_screen_precip">강수량 합계</string>
+    <string name="cond_screen_temp_unit_celsius">섭씨(°C)</string>
+    <string name="cond_screen_temp_unit_fahrenheit">화씨(°F)</string>
+    <string name="cond_screen_precip_value_in_last_hours">지난%s시간</string>
+    <string name="cond_screen_precip_value_in_next_hours">다음%s시간</string>
+
+    <string name="settings_screen_title">설정</string>
+    <string name="settings_screen_title_units">단위</string>
+    <string name="settings_screen_title_temp_unit">온도</string>
+    <string name="settings_screen_label_temp_unit_celsius">섭씨 온도</string>
+    <string name="settings_screen_label_temp_unit_fahrenheit">화씨 온도</string>
+    <string name="settings_screen_title_wind_unit">바람</string>
+    <string name="settings_screen_label_wind_unit_mps">초당 미터</string>
+    <string name="settings_screen_label_wind_unit_kph">시간당 킬로미터</string>
+    <string name="settings_screen_label_wind_unit_mph">시간당 마일</string>
+    <string name="settings_screen_label_wind_unit_kn">매듭</string>
+    <string name="settings_screen_title_precip_unit">강수량</string>
+    <string name="settings_screen_title_rain_unit">비</string>
+    <string name="settings_screen_title_showers_unit">샤워</string>
+    <string name="settings_screen_title_snow_unit">눈</string>
+    <string name="settings_screen_label_precip_unit_mm">밀리미터</string>
+    <string name="settings_screen_label_precip_unit_cm">센티미터</string>
+    <string name="settings_screen_label_precip_unit_in">신장</string>
+    <string name="settings_screen_title_pressure_unit">압력</string>
+    <string name="settings_screen_label_pressure_unit_hpa">헥토파스칼</string>
+    <string name="settings_screen_label_pressure_unit_inhg">수은의 인치</string>
+    <string name="settings_screen_label_pressure_unit_mmhg">수은 밀리미터</string>
+    <string name="settings_screen_title_vis_unit">시계</string>
+    <string name="settings_screen_label_vis_unit_km">킬로미터</string>
+    <string name="settings_screen_label_vis_unit_mi">마일리지</string>
+    <string name="settings_screen_label_vis_unit_m">미터</string>
+    <string name="settings_screen_label_vis_unit_ft">피트</string>
+    <string name="settings_screen_title_appearance">모습</string>
+    <string name="settings_screen_title_theme">주제</string>
+    <string name="settings_screen_label_dark">어두운</string>
+    <string name="settings_screen_label_light">빛</string>
+    <string name="settings_screen_label_follow_system">팔로우 시스템</string>
+
+    <string name="date_time_now">지금</string>
+    <string name="date_time_today">오늘</string>
+    <string name="date_time_pattern_hour">허</string>
+    <string name="date_time_pattern_hour_minute">HH:mm</string>
+    <string name="date_time_pattern_dow">이자형</string>
+    <string name="date_time_pattern_dow_hour_minute">E, HH:mm</string>
+
+    <string name="precip_mixed">강수량</string>
+    <string name="precip_rain">비</string>
+    <string name="precip_showers">샤워</string>
+    <string name="precip_snow">눈</string>
+    <string name="precip_value_in_last_hours">지난%s시간에</string>
+    <string name="precip_value_showers_in_next_hours">다음%2$sh에는%1$s소나기가 예상됩니다.</string>
+    <string name="precip_value_rain_in_next_hours">다음%2$s에는%1$s비가 예상됩니다.</string>
+    <string name="precip_value_snow_in_next_hours">%1$s다음%2$s에는 눈이 내릴 것으로 예상됩니다.</string>
+    <string name="precip_value_mixed_in_next_hours">%1$s는 다음%2$s에 예상됩니다. h.</string>
+    <string name="precip_value_showers_on_day">다음으로 예상되는 것은%2$s에%1$s소나기입니다.</string>
+    <string name="precip_value_rain_on_day">다음으로 예상되는 비는%2$s에%1$s비가 내릴 것입니다.</string>
+    <string name="precip_value_snow_on_day">다음으로 예상되는 눈은%2$s에%1$s눈입니다.</string>
+    <string name="precip_value_mixed_on_day">다음으로 예상되는 것은%2$s의%1$s입니다.</string>
+    <string name="precip_value_none_in_next_days">다음%s에는 아무것도 예상되지 않습니다. d.</string>
+    <string name="precip_unit_mm">mm</string>
+    <string name="precip_value_mm">%smm</string>
+    <string name="precip_unit_cm">센티미터</string>
+    <string name="precip_value_cm">%scm</string>
+    <string name="precip_unit_in">″</string>
+    <string name="precip_value_in">%s″</string>
+
+    <string name="pop_value_percent">%s%%</string>
+
+    <string name="pressure">압력</string>
+    <string name="pressure_trend_falling">떨어지는</string>
+    <string name="pressure_trend_steady">꾸준한</string>
+    <string name="pressure_trend_rising">상승</string>
+    <string name="pressure_value_average">평균:%s</string>
+    <string name="pressure_unit_hpa">hPa</string>
+    <string name="pressure_value_hpa">%shPa</string>
+    <string name="pressure_unit_inhg">inHg</string>
+    <string name="pressure_value_inhg">%sinHg</string>
+    <string name="pressure_unit_mmhg">mmHg</string>
+    <string name="pressure_value_mmhg">%smmHg</string>
+
+    <string name="humidity">습기</string>
+    <string name="humidity_value_percent">%s%%</string>
+
+    <string name="sunrise">해돋이</string>
+    <string name="sunset">일몰</string>
+    <string name="sunrise_value">일출:%s</string>
+    <string name="sunset_value">일몰:%s</string>
+    <string name="sunrise_not_today">오늘은 일출이 없습니다.</string>
+    <string name="sunset_not_today">오늘은 일몰이 없습니다.</string>
+    <string name="sunrise_value_more_than_days_away">&gt;%s</string>
+    <string name="sunrise_value_more_than_hours_away">&gt;%sh</string>
+    <string name="sunset_value_more_than_days_away">&gt;%s</string>
+    <string name="sunset_value_more_than_hours_away">&gt;%sh</string>
+
+    <string name="temp_value_degree">%s°</string>
+    <string name="dew_point_value_right_now">현재 이슬점은%s입니다.</string>
+    <string name="feels_like">같은 느낌</string>
+    <string name="feels_like_value">%s같은 느낌</string>
+    <string name="feels_like_value_actual">실제%s</string>
+    <string name="feels_like_cooler_than_actual">바람이 불어서 기분이 더 시원해집니다.</string>
+    <string name="feels_like_colder_than_actual">바람이 불어서 체감이 더 추워지네요.</string>
+    <string name="feels_like_warmer_than_actual">습도가 높아서 더 따뜻해지는 것 같아요.</string>
+    <string name="feels_like_hotter_than_actual">습도 때문에 더 더워지는 것 같아요.</string>
+    <string name="feels_like_similar_to_actual">실제온도와 비슷합니다.</string>
+
+    <string name="uv_index">자외선 지수</string>
+    <string name="uv_index_risk_low">낮은</string>
+    <string name="uv_index_risk_moderate">보통의</string>
+    <string name="uv_index_risk_high">높은</string>
+    <string name="uv_index_risk_very_high">매우 높음</string>
+    <string name="uv_index_risk_extreme">극심한</string>
+    <string name="uv_index_protection_value_from_until">자외선 차단제%1$s-%2$s를 사용하세요.</string>
+    <string name="uv_index_protection_value_from">%s의 자외선 차단제를 사용하세요.</string>
+    <string name="uv_index_protection_value_until">%s까지 자외선 차단제를 사용하십시오.</string>
+    <string name="uv_index_protection_value_until_end_of_day">하루 종일 자외선 차단제를 사용하십시오.</string>
+    <string name="uv_index_protection_value_none">나머지 하루 동안은 낮습니다.</string>
+
+    <string name="vis">시계</string>
+    <string name="vis_unit_m">중</string>
+    <string name="vis_value_m">%sm</string>
+    <string name="vis_unit_ft">피트</string>
+    <string name="vis_value_ft">%s피트</string>
+    <string name="vis_unit_km">km</string>
+    <string name="vis_value_km">%skm</string>
+    <string name="vis_unit_mi">미</string>
+    <string name="vis_value_mi">%s마일</string>
+    <string name="vis_description_perfect">완벽하게 선명한 시야.</string>
+    <string name="vis_description_clear">명확한 전망.</string>
+    <string name="vis_description_fair">상당히 선명한 시야.</string>
+    <string name="vis_description_low">시야가 차단되었습니다.</string>
+    <string name="vis_description_very_low">시야가 매우 방해됨.</string>
+
+    <string name="wind_label">바람</string>
+    <string name="wind_bft_0">침착한</string>
+    <string name="wind_bft_1">가벼운 공기</string>
+    <string name="wind_bft_2">가벼운 바람</string>
+    <string name="wind_bft_3">부드러운 바람</string>
+    <string name="wind_bft_4">적당한 바람</string>
+    <string name="wind_bft_5">신선한 바람</string>
+    <string name="wind_bft_6">강한 바람</string>
+    <string name="wind_bft_7">강풍 근처</string>
+    <string name="wind_bft_8">신선한 강풍</string>
+    <string name="wind_bft_9">강한 강풍</string>
+    <string name="wind_bft_10">전강풍</string>
+    <string name="wind_bft_11">격렬한 폭풍</string>
+    <string name="wind_bft_12">허리케인 힘</string>
+    <string name="wind_value_gusts_at">%s에 돌풍이 불고 있습니다.</string>
+    <string name="wind_unit_mps">밀리미터/초</string>
+    <string name="wind_value_mps">%sm/초</string>
+    <string name="wind_unit_kph">km/h</string>
+    <string name="wind_value_kph">%skm/h</string>
+    <string name="wind_unit_kn">kn</string>
+    <string name="wind_value_kn">%skn</string>
+    <string name="wind_unit_mph">mi/h</string>
+    <string name="wind_value_mph">%smi/h</string>
+
+    <string name="wmo_0">분명한</string>
+    <string name="wmo_1">대체로 맑음</string>
+    <string name="wmo_2">약간 흐림</string>
+    <string name="wmo_3">흐린</string>
+    <string name="wmo_45">안개</string>
+    <string name="wmo_48">수빙 안개 퇴적</string>
+    <string name="wmo_51">가벼운 이슬비</string>
+    <string name="wmo_53">이슬비</string>
+    <string name="wmo_55">짙은 이슬비</string>
+    <string name="wmo_56">가벼운 동결 이슬비</string>
+    <string name="wmo_57">짙은 동결 이슬비</string>
+    <string name="wmo_61">가벼운 비</string>
+    <string name="wmo_63">비</string>
+    <string name="wmo_65">폭우</string>
+    <string name="wmo_66">가벼운 비</string>
+    <string name="wmo_67">심한 비</string>
+    <string name="wmo_71">가벼운 눈</string>
+    <string name="wmo_73">눈</string>
+    <string name="wmo_75">폭설</string>
+    <string name="wmo_77">눈알</string>
+    <string name="wmo_80">약한 소나기</string>
+    <string name="wmo_81">샤워</string>
+    <string name="wmo_82">폭우</string>
+    <string name="wmo_85">가벼운 소나기</string>
+    <string name="wmo_86">폭설</string>
+    <string name="wmo_95">뇌우</string>
+    <string name="wmo_96">약한 우박을 동반한 뇌우</string>
+    <string name="wmo_99">심한 우박을 동반한 뇌우</string>
+</resources>

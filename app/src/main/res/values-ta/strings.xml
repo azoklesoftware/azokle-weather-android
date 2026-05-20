@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name" translatable="false">Azokle Weather</string>
+    <string name="app_company" translatable="false">Azokle Private Limited</string>
+    <string name="app_division" translatable="false">Azokle Software</string>
+    <string name="general_error_failed_to_download">முன்னறிவிப்பைப் பதிவிறக்க முடியவில்லை. இணையத்துடன் இணைத்து மீண்டும் முயற்சிக்கவும்.</string>
+    <string name="general_error_outdated">உங்கள் முன்னறிவிப்பு தரவு காலாவதியானது. இணையத்துடன் இணைத்து மீண்டும் முயற்சிக்கவும்.</string>
+    <string name="general_error_no_selected_place">தேர்ந்தெடுக்கப்பட்ட இடம் இல்லை.</string>
+    <string name="general_btn_try_again">மீண்டும் முயற்சிக்கவும்</string>
+    <string name="general_btn_select_place">இடத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="general_btn_dialog_confirm">சரி</string>
+    <string name="general_btn_dialog_cancel">ரத்து செய்</string>
+
+    <string name="credit_weather">Open-Meteo.com இன் வானிலை தரவு</string>
+    <string name="credit_geocoding">Open-Meteo.com மூலம் ஜியோகோடிங் தரவு</string>
+
+    <string name="place_picker_hint_search">இடங்களைத் தேடு…</string>
+    <string name="place_picker_title_saved_places">சேமிக்கப்பட்ட இடங்கள்</string>
+    <string name="place_picker_title_search_results">தேடல் முடிவுகள்</string>
+    <string name="place_picker_error_no_internet">நீங்கள் ஆஃப்லைனில் இருப்பது போல் தெரிகிறது. இணையத்துடன் இணைத்து மீண்டும் முயற்சிக்கவும்.</string>
+    <string name="place_picker_error_value_no_results_for">\"%s\" க்கான முடிவுகள் இல்லை.</string>
+    <string name="place_picker_error_no_saved_places">சேமிக்கப்பட்ட இடங்கள் இல்லை.</string>
+    <string name="delete_place_value">%sஐ நீக்கவா?</string>
+    <string name="delete_place_description">இது அதன் தற்காலிகச் சேமிப்பு முன்னறிவிப்புத் தரவையும் நீக்கும்.</string>
+
+    <string name="cond_screen_title">நிபந்தனைகள்</string>
+    <string name="cond_screen_pop">மழை பெய்ய வாய்ப்பு</string>
+    <string name="cond_screen_precip">மொத்த மழைப்பொழிவு</string>
+    <string name="cond_screen_temp_unit_celsius">செல்சியஸ் (°C)</string>
+    <string name="cond_screen_temp_unit_fahrenheit">பாரன்ஹீட் (°F)</string>
+    <string name="cond_screen_precip_value_in_last_hours">கடைசி%sமணிநேரம்</string>
+    <string name="cond_screen_precip_value_in_next_hours">அடுத்த%sமணிநேரம்</string>
+
+    <string name="settings_screen_title">அமைப்புகள்</string>
+    <string name="settings_screen_title_units">அலகுகள்</string>
+    <string name="settings_screen_title_temp_unit">வெப்பநிலை</string>
+    <string name="settings_screen_label_temp_unit_celsius">டிகிரி செல்சியஸ்</string>
+    <string name="settings_screen_label_temp_unit_fahrenheit">டிகிரி பாரன்ஹீட்</string>
+    <string name="settings_screen_title_wind_unit">காற்று</string>
+    <string name="settings_screen_label_wind_unit_mps">வினாடிக்கு மீட்டர்</string>
+    <string name="settings_screen_label_wind_unit_kph">ஒரு மணி நேரத்திற்கு கி.மீ</string>
+    <string name="settings_screen_label_wind_unit_mph">ஒரு மணி நேரத்திற்கு மைல்கள்</string>
+    <string name="settings_screen_label_wind_unit_kn">முடிச்சுகள்</string>
+    <string name="settings_screen_title_precip_unit">மழைப்பொழிவு</string>
+    <string name="settings_screen_title_rain_unit">மழை</string>
+    <string name="settings_screen_title_showers_unit">மழை</string>
+    <string name="settings_screen_title_snow_unit">பனி</string>
+    <string name="settings_screen_label_precip_unit_mm">மில்லிமீட்டர்கள்</string>
+    <string name="settings_screen_label_precip_unit_cm">சென்டிமீட்டர்கள்</string>
+    <string name="settings_screen_label_precip_unit_in">அங்குலம்</string>
+    <string name="settings_screen_title_pressure_unit">அழுத்தம்</string>
+    <string name="settings_screen_label_pressure_unit_hpa">ஹெக்டோபாஸ்கல்</string>
+    <string name="settings_screen_label_pressure_unit_inhg">அங்குல பாதரசம்</string>
+    <string name="settings_screen_label_pressure_unit_mmhg">மில்லிமீட்டர் பாதரசம்</string>
+    <string name="settings_screen_title_vis_unit">தெரிவுநிலை</string>
+    <string name="settings_screen_label_vis_unit_km">கிலோமீட்டர்கள்</string>
+    <string name="settings_screen_label_vis_unit_mi">மைல்கள்</string>
+    <string name="settings_screen_label_vis_unit_m">மீட்டர்கள்</string>
+    <string name="settings_screen_label_vis_unit_ft">அடி</string>
+    <string name="settings_screen_title_appearance">தோற்றம்</string>
+    <string name="settings_screen_title_theme">தீம்</string>
+    <string name="settings_screen_label_dark">இருள்</string>
+    <string name="settings_screen_label_light">ஒளி</string>
+    <string name="settings_screen_label_follow_system">முறையைப் பின்பற்றவும்</string>
+
+    <string name="date_time_now">இப்போது</string>
+    <string name="date_time_today">இன்று</string>
+    <string name="date_time_pattern_hour">HH</string>
+    <string name="date_time_pattern_hour_minute">HH:mm</string>
+    <string name="date_time_pattern_dow">ஈ</string>
+    <string name="date_time_pattern_dow_hour_minute">E, HH:mm</string>
+
+    <string name="precip_mixed">மழைப்பொழிவு</string>
+    <string name="precip_rain">மழை</string>
+    <string name="precip_showers">மழை</string>
+    <string name="precip_snow">பனி</string>
+    <string name="precip_value_in_last_hours">கடந்த%sம</string>
+    <string name="precip_value_showers_in_next_hours">அடுத்த%2$sமணிநேரத்தில்%1$sமழை எதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_rain_in_next_hours">அடுத்த%2$sமணிநேரத்தில்%1$sமழை எதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_snow_in_next_hours">%1$sபனி அடுத்த%2$sமணிநேரத்தில் எதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_mixed_in_next_hours">அடுத்த%2$sமணிநேரத்தில்%1$sஎதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_showers_on_day">அடுத்ததாக%2$sஇல்%1$sமழை பெய்யும் என எதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_rain_on_day">அடுத்ததாக%2$sஇல்%1$sமழை எதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_snow_on_day">அடுத்ததாக%2$sஇல்%1$sபனி எதிர்பார்க்கப்படுகிறது.</string>
+    <string name="precip_value_mixed_on_day">அடுத்து எதிர்பார்க்கப்படுவது%2$sஇல்%1$sஆகும்.</string>
+    <string name="precip_value_none_in_next_days">அடுத்த%sd இல் எதுவும் எதிர்பார்க்கப்படவில்லை.</string>
+    <string name="precip_unit_mm">மிமீ</string>
+    <string name="precip_value_mm">%sமிமீ</string>
+    <string name="precip_unit_cm">செ.மீ</string>
+    <string name="precip_value_cm">%sசெ.மீ</string>
+    <string name="precip_unit_in">"</string>
+    <string name="precip_value_in">%s″</string>
+
+    <string name="pop_value_percent">%s%%</string>
+
+    <string name="pressure">அழுத்தம்</string>
+    <string name="pressure_trend_falling">விழுகிறது</string>
+    <string name="pressure_trend_steady">நிலையானது</string>
+    <string name="pressure_trend_rising">உயர்கிறது</string>
+    <string name="pressure_value_average">சராசரி:%s</string>
+    <string name="pressure_unit_hpa">hPa</string>
+    <string name="pressure_value_hpa">%shPa</string>
+    <string name="pressure_unit_inhg">inHg</string>
+    <string name="pressure_value_inhg">%sinHg</string>
+    <string name="pressure_unit_mmhg">mmHg</string>
+    <string name="pressure_value_mmhg">%smmHg</string>
+
+    <string name="humidity">ஈரப்பதம்</string>
+    <string name="humidity_value_percent">%s%%</string>
+
+    <string name="sunrise">சூரிய உதயம்</string>
+    <string name="sunset">சூரிய அஸ்தமனம்</string>
+    <string name="sunrise_value">சூரிய உதயம்:%s</string>
+    <string name="sunset_value">சூரிய அஸ்தமனம்:%s</string>
+    <string name="sunrise_not_today">இன்று சூரிய உதயம் இல்லை.</string>
+    <string name="sunset_not_today">இன்று சூரிய அஸ்தமனம் இல்லை.</string>
+    <string name="sunrise_value_more_than_days_away">&gt;%sடி</string>
+    <string name="sunrise_value_more_than_hours_away">&gt;%sம</string>
+    <string name="sunset_value_more_than_days_away">&gt;%sடி</string>
+    <string name="sunset_value_more_than_hours_away">&gt;%sம</string>
+
+    <string name="temp_value_degree">%s°</string>
+    <string name="dew_point_value_right_now">இப்போது பனிப்புள்ளி%sஆக உள்ளது.</string>
+    <string name="feels_like">போல் உணர்கிறேன்</string>
+    <string name="feels_like_value">%sபோல் உணர்கிறேன்</string>
+    <string name="feels_like_value_actual">உண்மையான%s</string>
+    <string name="feels_like_cooler_than_actual">காற்று குளிர்ச்சியை உணர வைக்கிறது.</string>
+    <string name="feels_like_colder_than_actual">காற்று குளிர்ச்சியை உணர வைக்கிறது.</string>
+    <string name="feels_like_warmer_than_actual">ஈரப்பதம் அதை வெப்பமாக உணர வைக்கிறது.</string>
+    <string name="feels_like_hotter_than_actual">ஈரப்பதம் அதை அதிக வெப்பமாக உணர வைக்கிறது.</string>
+    <string name="feels_like_similar_to_actual">உண்மையான வெப்பநிலையைப் போன்றது.</string>
+
+    <string name="uv_index">UV குறியீடு</string>
+    <string name="uv_index_risk_low">குறைந்த</string>
+    <string name="uv_index_risk_moderate">மிதமான</string>
+    <string name="uv_index_risk_high">உயர்</string>
+    <string name="uv_index_risk_very_high">மிக உயர்ந்தது</string>
+    <string name="uv_index_risk_extreme">தீவிர</string>
+    <string name="uv_index_protection_value_from_until">சூரிய பாதுகாப்பு பயன்படுத்தவும்%1$s-%2$s.</string>
+    <string name="uv_index_protection_value_from">%sஇலிருந்து சூரிய பாதுகாப்பைப் பயன்படுத்தவும்.</string>
+    <string name="uv_index_protection_value_until">%sவரை சூரிய பாதுகாப்பைப் பயன்படுத்தவும்.</string>
+    <string name="uv_index_protection_value_until_end_of_day">நாள் முழுவதும் சூரிய பாதுகாப்பு பயன்படுத்தவும்.</string>
+    <string name="uv_index_protection_value_none">நாள் முழுவதும் குறைவு.</string>
+
+    <string name="vis">தெரிவுநிலை</string>
+    <string name="vis_unit_m">மீ</string>
+    <string name="vis_value_m">%sமீ</string>
+    <string name="vis_unit_ft">அடி</string>
+    <string name="vis_value_ft">%sஅடி</string>
+    <string name="vis_unit_km">கி.மீ</string>
+    <string name="vis_value_km">%sகிமீ</string>
+    <string name="vis_unit_mi">மை</string>
+    <string name="vis_value_mi">%sமை</string>
+    <string name="vis_description_perfect">முற்றிலும் தெளிவான பார்வை.</string>
+    <string name="vis_description_clear">தெளிவான பார்வை.</string>
+    <string name="vis_description_fair">ஓரளவு தெளிவான பார்வை.</string>
+    <string name="vis_description_low">தடைப்பட்ட பார்வை.</string>
+    <string name="vis_description_very_low">மிகவும் தடைப்பட்ட பார்வை.</string>
+
+    <string name="wind_label">காற்று</string>
+    <string name="wind_bft_0">அமைதி</string>
+    <string name="wind_bft_1">லேசான காற்று</string>
+    <string name="wind_bft_2">லேசான காற்று</string>
+    <string name="wind_bft_3">மெல்லிய காற்று</string>
+    <string name="wind_bft_4">மிதமான காற்று</string>
+    <string name="wind_bft_5">புதிய காற்று</string>
+    <string name="wind_bft_6">பலத்த காற்று</string>
+    <string name="wind_bft_7">புயல் அருகில்</string>
+    <string name="wind_bft_8">புதிய புயல்</string>
+    <string name="wind_bft_9">பலத்த புயல்</string>
+    <string name="wind_bft_10">முழு புயல்</string>
+    <string name="wind_bft_11">கடுமையான புயல்</string>
+    <string name="wind_bft_12">சூறாவளி படை</string>
+    <string name="wind_value_gusts_at">%sஇல் காற்று வீசுகிறது.</string>
+    <string name="wind_unit_mps">மீ/வி</string>
+    <string name="wind_value_mps">%sமீ/வி</string>
+    <string name="wind_unit_kph">கிமீ/ம</string>
+    <string name="wind_value_kph">%skm/h</string>
+    <string name="wind_unit_kn">kn</string>
+    <string name="wind_value_kn">%skn</string>
+    <string name="wind_unit_mph">மை/ம</string>
+    <string name="wind_value_mph">%sமை/ம</string>
+
+    <string name="wmo_0">தெளிவு</string>
+    <string name="wmo_1">பெரும்பாலும் தெளிவானது</string>
+    <string name="wmo_2">ஓரளவு மேகமூட்டத்துடன் காணப்படும்</string>
+    <string name="wmo_3">மேகமூட்டம்</string>
+    <string name="wmo_45">மூடுபனி</string>
+    <string name="wmo_48">டெபாசிட் ரிம் மூடுபனி</string>
+    <string name="wmo_51">லேசான தூறல்</string>
+    <string name="wmo_53">தூறல்</string>
+    <string name="wmo_55">அடர்ந்த தூறல்</string>
+    <string name="wmo_56">லேசாக உறையும் தூறல்</string>
+    <string name="wmo_57">அடர்ந்த உறையும் தூறல்</string>
+    <string name="wmo_61">லேசான மழை</string>
+    <string name="wmo_63">மழை</string>
+    <string name="wmo_65">பலத்த மழை</string>
+    <string name="wmo_66">லேசான உறைபனி மழை</string>
+    <string name="wmo_67">கடும் உறைபனி மழை</string>
+    <string name="wmo_71">லேசான பனி</string>
+    <string name="wmo_73">பனி</string>
+    <string name="wmo_75">கடும் பனி</string>
+    <string name="wmo_77">பனி தானியங்கள்</string>
+    <string name="wmo_80">லேசான மழை</string>
+    <string name="wmo_81">மழை</string>
+    <string name="wmo_82">பலத்த மழை</string>
+    <string name="wmo_85">லேசான பனி மழை</string>
+    <string name="wmo_86">கடும் பனி மழை</string>
+    <string name="wmo_95">இடியுடன் கூடிய மழை</string>
+    <string name="wmo_96">லேசான ஆலங்கட்டி மழையுடன் இடியுடன் கூடிய மழை</string>
+    <string name="wmo_99">இடியுடன் கூடிய கனமழை</string>
+</resources>

@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name" translatable="false">Azokle Weather</string>
+    <string name="app_company" translatable="false">Azokle Private Limited</string>
+    <string name="app_division" translatable="false">Azokle Software</string>
+    <string name="general_error_failed_to_download">अंदाज डाउनलोड करण्यात अयशस्वी. इंटरनेटशी कनेक्ट करा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="general_error_outdated">तुमचा अंदाज डेटा कालबाह्य झाला आहे. इंटरनेटशी कनेक्ट करा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="general_error_no_selected_place">निवडलेले ठिकाण नाही.</string>
+    <string name="general_btn_try_again">पुन्हा प्रयत्न करा</string>
+    <string name="general_btn_select_place">ठिकाण निवडा</string>
+    <string name="general_btn_dialog_confirm">ठीक आहे</string>
+    <string name="general_btn_dialog_cancel">रद्द करा</string>
+
+    <string name="credit_weather">Open-Meteo.com द्वारे हवामान डेटा</string>
+    <string name="credit_geocoding">Open-Meteo.com द्वारे जिओकोडिंग डेटा</string>
+
+    <string name="place_picker_hint_search">ठिकाणे शोधा…</string>
+    <string name="place_picker_title_saved_places">जतन केलेली ठिकाणे</string>
+    <string name="place_picker_title_search_results">शोध परिणाम</string>
+    <string name="place_picker_error_no_internet">तुम्ही ऑफलाइन आहात असे दिसते. इंटरनेटशी कनेक्ट करा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="place_picker_error_value_no_results_for">\"%s\" साठी कोणतेही परिणाम नाहीत.</string>
+    <string name="place_picker_error_no_saved_places">कोणतीही जतन केलेली ठिकाणे नाहीत.</string>
+    <string name="delete_place_value">%sहटवायचे?</string>
+    <string name="delete_place_description">हे त्याचा कॅशे केलेला अंदाज डेटा देखील हटवेल.</string>
+
+    <string name="cond_screen_title">अटी</string>
+    <string name="cond_screen_pop">पर्जन्यवृष्टीची शक्यता</string>
+    <string name="cond_screen_precip">अवक्षेपण एकूण</string>
+    <string name="cond_screen_temp_unit_celsius">सेल्सिअस (°C)</string>
+    <string name="cond_screen_temp_unit_fahrenheit">फॅरेनहाइट (°F)</string>
+    <string name="cond_screen_precip_value_in_last_hours">शेवटचे%sतास</string>
+    <string name="cond_screen_precip_value_in_next_hours">पुढील%sतास</string>
+
+    <string name="settings_screen_title">सेटिंग्ज</string>
+    <string name="settings_screen_title_units">युनिट्स</string>
+    <string name="settings_screen_title_temp_unit">तापमान</string>
+    <string name="settings_screen_label_temp_unit_celsius">अंश सेल्सिअस</string>
+    <string name="settings_screen_label_temp_unit_fahrenheit">डिग्री फॅरेनहाइट</string>
+    <string name="settings_screen_title_wind_unit">वारा</string>
+    <string name="settings_screen_label_wind_unit_mps">मीटर प्रति सेकंद</string>
+    <string name="settings_screen_label_wind_unit_kph">किलोमीटर प्रति तास</string>
+    <string name="settings_screen_label_wind_unit_mph">प्रति तास मैल</string>
+    <string name="settings_screen_label_wind_unit_kn">गाठी</string>
+    <string name="settings_screen_title_precip_unit">वर्षाव</string>
+    <string name="settings_screen_title_rain_unit">पाऊस</string>
+    <string name="settings_screen_title_showers_unit">सरी</string>
+    <string name="settings_screen_title_snow_unit">बर्फ</string>
+    <string name="settings_screen_label_precip_unit_mm">मिलिमीटर</string>
+    <string name="settings_screen_label_precip_unit_cm">सेंटीमीटर</string>
+    <string name="settings_screen_label_precip_unit_in">इंच</string>
+    <string name="settings_screen_title_pressure_unit">दाब</string>
+    <string name="settings_screen_label_pressure_unit_hpa">हेक्टोपास्कल</string>
+    <string name="settings_screen_label_pressure_unit_inhg">पारा इंच</string>
+    <string name="settings_screen_label_pressure_unit_mmhg">मिलिमीटर पारा</string>
+    <string name="settings_screen_title_vis_unit">दृश्यमानता</string>
+    <string name="settings_screen_label_vis_unit_km">किलोमीटर</string>
+    <string name="settings_screen_label_vis_unit_mi">मैल</string>
+    <string name="settings_screen_label_vis_unit_m">मीटर</string>
+    <string name="settings_screen_label_vis_unit_ft">पाय</string>
+    <string name="settings_screen_title_appearance">देखावा</string>
+    <string name="settings_screen_title_theme">थीम</string>
+    <string name="settings_screen_label_dark">गडद</string>
+    <string name="settings_screen_label_light">प्रकाश</string>
+    <string name="settings_screen_label_follow_system">प्रणालीचे अनुसरण करा</string>
+
+    <string name="date_time_now">आता</string>
+    <string name="date_time_today">आज</string>
+    <string name="date_time_pattern_hour">प.पू</string>
+    <string name="date_time_pattern_hour_minute">HH:mm</string>
+    <string name="date_time_pattern_dow">इ</string>
+    <string name="date_time_pattern_dow_hour_minute">E, HH:mm</string>
+
+    <string name="precip_mixed">वर्षाव</string>
+    <string name="precip_rain">पाऊस</string>
+    <string name="precip_showers">सरी</string>
+    <string name="precip_snow">बर्फ</string>
+    <string name="precip_value_in_last_hours">शेवटच्या%sमध्ये h</string>
+    <string name="precip_value_showers_in_next_hours">पुढील%2$sh मध्ये%1$sसरी अपेक्षित आहेत.</string>
+    <string name="precip_value_rain_in_next_hours">पुढील%2$sh मध्ये%1$sपाऊस अपेक्षित आहे.</string>
+    <string name="precip_value_snow_in_next_hours">पुढील%2$sh मध्ये%1$sबर्फ अपेक्षित आहे.</string>
+    <string name="precip_value_mixed_in_next_hours">%1$sपुढील%2$sh मध्ये अपेक्षित आहे.</string>
+    <string name="precip_value_showers_on_day">पुढे%2$sवर%1$sसरी अपेक्षित आहेत.</string>
+    <string name="precip_value_rain_on_day">पुढे%2$sवर%1$sपाऊस अपेक्षित आहे.</string>
+    <string name="precip_value_snow_on_day">पुढे%2$sवर%1$sबर्फ अपेक्षित आहे.</string>
+    <string name="precip_value_mixed_on_day">पुढे%2$sवर%1$sअपेक्षित आहे.</string>
+    <string name="precip_value_none_in_next_days">पुढील%sd मध्ये काहीही अपेक्षित नाही.</string>
+    <string name="precip_unit_mm">मिमी</string>
+    <string name="precip_value_mm">%sमिमी</string>
+    <string name="precip_unit_cm">सेमी</string>
+    <string name="precip_value_cm">%sसेमी</string>
+    <string name="precip_unit_in">"</string>
+    <string name="precip_value_in">%s″</string>
+
+    <string name="pop_value_percent">%s%%</string>
+
+    <string name="pressure">दाब</string>
+    <string name="pressure_trend_falling">पडणे</string>
+    <string name="pressure_trend_steady">स्थिर</string>
+    <string name="pressure_trend_rising">उगवतो</string>
+    <string name="pressure_value_average">सरासरी:%s</string>
+    <string name="pressure_unit_hpa">hPa</string>
+    <string name="pressure_value_hpa">%shPa</string>
+    <string name="pressure_unit_inhg">inHg</string>
+    <string name="pressure_value_inhg">%sinHg</string>
+    <string name="pressure_unit_mmhg">mmHg</string>
+    <string name="pressure_value_mmhg">%smmHg</string>
+
+    <string name="humidity">आर्द्रता</string>
+    <string name="humidity_value_percent">%s%%</string>
+
+    <string name="sunrise">सूर्योदय</string>
+    <string name="sunset">सूर्यास्त</string>
+    <string name="sunrise_value">सूर्योदय:%s</string>
+    <string name="sunset_value">सूर्यास्त:%s</string>
+    <string name="sunrise_not_today">आज सूर्योदय नाही.</string>
+    <string name="sunset_not_today">आज सूर्यास्त नाही.</string>
+    <string name="sunrise_value_more_than_days_away">&gt; पीपीएचएच0पीपीएचएच डी</string>
+    <string name="sunrise_value_more_than_hours_away">&gt; पीपीएचएच0पीपीएचएच एच</string>
+    <string name="sunset_value_more_than_days_away">&gt; पीपीएचएच0पीपीएचएच डी</string>
+    <string name="sunset_value_more_than_hours_away">&gt; पीपीएचएच0पीपीएचएच एच</string>
+
+    <string name="temp_value_degree">%s°</string>
+    <string name="dew_point_value_right_now">दवबिंदू सध्या%sआहे.</string>
+    <string name="feels_like">असे वाटते</string>
+    <string name="feels_like_value">%sसारखे वाटते</string>
+    <string name="feels_like_value_actual">वास्तविक%s</string>
+    <string name="feels_like_cooler_than_actual">वाऱ्यामुळे थंडी जाणवत आहे.</string>
+    <string name="feels_like_colder_than_actual">वाऱ्यामुळे थंडी जाणवत आहे.</string>
+    <string name="feels_like_warmer_than_actual">आर्द्रतेमुळे गरमी जाणवत आहे.</string>
+    <string name="feels_like_hotter_than_actual">आर्द्रतेमुळे उष्णतेची जाणीव होत आहे.</string>
+    <string name="feels_like_similar_to_actual">वास्तविक तापमानाप्रमाणेच.</string>
+
+    <string name="uv_index">अतिनील निर्देशांक</string>
+    <string name="uv_index_risk_low">कमी</string>
+    <string name="uv_index_risk_moderate">मध्यम</string>
+    <string name="uv_index_risk_high">उच्च</string>
+    <string name="uv_index_risk_very_high">खूप उच्च</string>
+    <string name="uv_index_risk_extreme">अत्यंत</string>
+    <string name="uv_index_protection_value_from_until">सूर्य संरक्षण%1$s-%2$sवापरा.</string>
+    <string name="uv_index_protection_value_from">%sपासून सूर्य संरक्षण वापरा.</string>
+    <string name="uv_index_protection_value_until">%sपर्यंत सूर्य संरक्षण वापरा.</string>
+    <string name="uv_index_protection_value_until_end_of_day">दिवसातील उर्वरित सूर्य संरक्षण वापरा.</string>
+    <string name="uv_index_protection_value_none">उर्वरित दिवसासाठी कमी.</string>
+
+    <string name="vis">दृश्यमानता</string>
+    <string name="vis_unit_m">मी</string>
+    <string name="vis_value_m">%sमी</string>
+    <string name="vis_unit_ft">फूट</string>
+    <string name="vis_value_ft">%sफूट</string>
+    <string name="vis_unit_km">किमी</string>
+    <string name="vis_value_km">%sकिमी</string>
+    <string name="vis_unit_mi">mi</string>
+    <string name="vis_value_mi">%sमी</string>
+    <string name="vis_description_perfect">अगदी स्पष्ट दृश्य.</string>
+    <string name="vis_description_clear">स्पष्ट दृश्य.</string>
+    <string name="vis_description_fair">अगदी स्पष्ट दृश्य.</string>
+    <string name="vis_description_low">अवरोधित दृश्य.</string>
+    <string name="vis_description_very_low">खूप अडथळा दृश्य.</string>
+
+    <string name="wind_label">वारा</string>
+    <string name="wind_bft_0">शांत</string>
+    <string name="wind_bft_1">हलकी हवा</string>
+    <string name="wind_bft_2">हलकी वाऱ्याची झुळूक</string>
+    <string name="wind_bft_3">मंद वाऱ्याची झुळूक</string>
+    <string name="wind_bft_4">मध्यम वाऱ्याची झुळूक</string>
+    <string name="wind_bft_5">ताजी झुळूक</string>
+    <string name="wind_bft_6">जोरदार वाऱ्याची झुळूक</string>
+    <string name="wind_bft_7">वाऱ्याजवळ</string>
+    <string name="wind_bft_8">ताजा वारा</string>
+    <string name="wind_bft_9">जोरदार वारा</string>
+    <string name="wind_bft_10">संपूर्ण वादळ</string>
+    <string name="wind_bft_11">हिंसक वादळ</string>
+    <string name="wind_bft_12">चक्रीवादळ शक्ती</string>
+    <string name="wind_value_gusts_at">%sवर जोराचा झोका.</string>
+    <string name="wind_unit_mps">मी/से</string>
+    <string name="wind_value_mps">%sमी/से</string>
+    <string name="wind_unit_kph">किमी/ता</string>
+    <string name="wind_value_kph">%sकिमी/ता</string>
+    <string name="wind_unit_kn">kn</string>
+    <string name="wind_value_kn">%skn</string>
+    <string name="wind_unit_mph">मैल/ता</string>
+    <string name="wind_value_mph">%sमी/ता</string>
+
+    <string name="wmo_0">साफ</string>
+    <string name="wmo_1">बहुतेक स्पष्ट</string>
+    <string name="wmo_2">अंशतः ढगाळ</string>
+    <string name="wmo_3">ढगाळ</string>
+    <string name="wmo_45">धुके</string>
+    <string name="wmo_48">राईम फॉग जमा करणे</string>
+    <string name="wmo_51">हलका रिमझिम पाऊस</string>
+    <string name="wmo_53">रिमझिम पाऊस</string>
+    <string name="wmo_55">दाट रिमझिम पाऊस</string>
+    <string name="wmo_56">हलका गोठवणारा रिमझिम पाऊस</string>
+    <string name="wmo_57">दाट गोठवणारी रिमझिम</string>
+    <string name="wmo_61">हलका पाऊस</string>
+    <string name="wmo_63">पाऊस</string>
+    <string name="wmo_65">मुसळधार पाऊस</string>
+    <string name="wmo_66">हलका गोठवणारा पाऊस</string>
+    <string name="wmo_67">मुसळधार पाऊस</string>
+    <string name="wmo_71">हलका बर्फ</string>
+    <string name="wmo_73">बर्फ</string>
+    <string name="wmo_75">प्रचंड बर्फ</string>
+    <string name="wmo_77">बर्फाचे धान्य</string>
+    <string name="wmo_80">हलक्या सरी</string>
+    <string name="wmo_81">सरी</string>
+    <string name="wmo_82">मुसळधार सरी</string>
+    <string name="wmo_85">हलके हिमवर्षाव</string>
+    <string name="wmo_86">मुसळधार हिमवर्षाव</string>
+    <string name="wmo_95">गडगडाट</string>
+    <string name="wmo_96">हलक्या गारांसह गडगडाट</string>
+    <string name="wmo_99">जोरदार गारांसह वादळ</string>
+</resources>

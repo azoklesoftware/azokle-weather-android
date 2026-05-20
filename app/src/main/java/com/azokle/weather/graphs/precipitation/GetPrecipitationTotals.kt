@@ -1,0 +1,87 @@
+/*
+ * Copyright 2024 Azokle Private Limited
+ *
+ * This file is part of Azokle Weather.
+ *
+ * Azokle Weather is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Azokle Weather is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with Azokle Weather. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package com.azokle.weather.graphs.precipitation
+
+import com.azokle.weather.forecast.ForecastResult
+import com.azokle.weather.place.Coordinates
+import com.azokle.weather.precipitation.Precipitation
+import com.azokle.weather.precipitation.PrecipitationPeriod
+import com.azokle.weather.precipitation.PrecipitationRepository
+import com.azokle.weather.units.Units
+import java.time.LocalDate
+import java.time.LocalDateTime
+
+private const val PAST_HOURS = 24
+private const val FUTURE_HOURS = 24
+
+class GetPrecipitationTotals(private val repo: PrecipitationRepository) {
+    suspend operator fun invoke(
+        coords: Coordinates,
+        units: Units,
+        now: LocalDateTime
+    ): ForecastResult<List<PrecipitationTotal>> {
+        val period = repo.period(coords, units) ?: return ForecastResult.FailedToDownload
+        val today = getToday(period, now) ?: return ForecastResult.Outdated
+        val days = period.daysFrom(now.toLocalDate()) ?: return ForecastResult.Outdated
+        val daysAfterToday = days.subList(1, days.size)
+        return ForecastResult.Success(
+            data = buildList {
+                add(today)
+                addAll(
+                    daysAfterToday.map { day ->
+                        PrecipitationTotal.OtherDay(
+                            day = day.first().hour.toLocalDate(),
+                            total = day.total.reduce()
+                        )
+                    }
+                )
+            }
+        )
+    }
+
+    private fun getToday(period: PrecipitationPeriod, now: LocalDateTime): PrecipitationTotal.Today? {
+        val past = period.momentsUntil(now, takeMoments = PAST_HOURS) ?: return null
+        val future = period.momentsFrom(now, takeMoments = FUTURE_HOURS) ?: return null
+        return PrecipitationTotal.Today(
+            day = now.toLocalDate(),
+            past = TotalPrecipitationInHours(
+                hours = past.size,
+                total = past.total.reduce()
+            ),
+            future = TotalPrecipitationInHours(
+                hours = future.size,
+                total = future.total.reduce()
+            )
+        )
+    }
+}
+
+sealed interface PrecipitationTotal {
+    val day: LocalDate
+
+    data class Today(
+        override val day: LocalDate,
+        val past: TotalPrecipitationInHours,
+        val future: TotalPrecipitationInHours
+    ) : PrecipitationTotal
+
+    data class OtherDay(
+        override val day: LocalDate,
+        val total: Precipitation
+    ) : PrecipitationTotal
+}
+
+data class TotalPrecipitationInHours(
+    val hours: Int,
+    val total: Precipitation
+)

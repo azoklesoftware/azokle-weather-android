@@ -1,0 +1,238 @@
+/*
+ * Copyright 2024 Azokle Private Limited
+ *
+ * This file is part of Azokle Weather.
+ *
+ * Azokle Weather is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ *
+ * Azokle Weather is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with Azokle Weather. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package com.azokle.weather
+
+import com.azokle.weather.forecast.ForecastConverter
+import com.azokle.weather.forecast.ForecastData
+import com.azokle.weather.units.Units
+import com.azokle.weather.humidity.Humidity
+import com.azokle.weather.pop.Pop
+import com.azokle.weather.precipitation.Precipitation
+import com.azokle.weather.precipitation.Rain
+import com.azokle.weather.precipitation.Showers
+import com.azokle.weather.precipitation.Snow
+import com.azokle.weather.pressure.Pressure
+import com.azokle.weather.temperature.Temperature
+import com.azokle.weather.uvindex.UvIndex
+import com.azokle.weather.visibility.Visibility
+import com.azokle.weather.wind.WindDirection
+import com.azokle.weather.wind.WindSpeed
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.*
+import org.junit.Test
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+
+class ForecastConverterTest {
+    @Test
+    fun `converts forecast data to imperial`() = runTest {
+        val imperial = Units(
+            temperature = Temperature.Unit.DegreesFahrenheit,
+            rain = Precipitation.Unit.Inches,
+            showers = Precipitation.Unit.Inches,
+            snow = Precipitation.Unit.Inches,
+            precipitation = Precipitation.Unit.Inches,
+            windSpeed = WindSpeed.Unit.MilesPerHour,
+            pressure = Pressure.Unit.InchesOfMercury,
+            visibility = Visibility.Unit.Miles
+        )
+        val time = listOf(
+            unixEpochStart,
+            unixEpochStart.plus(1, ChronoUnit.HOURS)
+        )
+        val sunrises = listOf<LocalDateTime>()
+        val sunsets = listOf<LocalDateTime>()
+        val temperature = listOf(
+            Temperature.fromDegreesCelsius(0.0),
+            Temperature.fromDegreesCelsius(0.0)
+        )
+        val feelsLikeTemperature = listOf(
+            Temperature.fromDegreesCelsius(0.0),
+            Temperature.fromDegreesCelsius(0.0)
+        )
+        val dewPointTemperature = listOf(
+            Temperature.fromDegreesCelsius(0.0),
+            Temperature.fromDegreesCelsius(0.0)
+        )
+        val pop = listOf(
+            Pop(value = 0.0),
+            Pop(value = 0.0)
+        )
+        val isDay = listOf(true, false)
+        val wmoCodes = listOf(1, 2)
+        val rain = listOf(
+            Rain.fromMillimeters(1.0),
+            Rain.fromMillimeters(1.0)
+        )
+        val showers = listOf(
+            Showers.Zero,
+            Showers.Zero
+        )
+        val snowfall = listOf(
+            Snow.Zero,
+            Snow.Zero
+        )
+        val uvIndex = listOf(
+            UvIndex(1),
+            UvIndex(1)
+        )
+        val windSpeed = listOf(
+            WindSpeed.fromMetersPerSecond(1.0),
+            WindSpeed.fromMetersPerSecond(1.0)
+        )
+        val windDirection = listOf(
+            WindDirection(10.0),
+            WindDirection(10.0)
+        )
+        val gustSpeed = listOf(
+            WindSpeed.fromMetersPerSecond(10.0),
+            WindSpeed.fromMetersPerSecond(10.0)
+        )
+        val pressure = listOf(
+            Pressure.fromHectopascal(1000.0),
+            Pressure.fromHectopascal(1000.0)
+        )
+        val visibility = listOf(
+            Visibility.fromMeters(1000.0),
+            Visibility.fromMeters(1000.0)
+        )
+        val humidity = listOf(
+            Humidity(80.0),
+            Humidity(80.0)
+        )
+        val forecastData = ForecastData(
+            timestamp = Instant.MIN,
+            times = time,
+            temperature = temperature,
+            feelsLikeTemperature = feelsLikeTemperature,
+            dewPointTemperature = dewPointTemperature,
+            pop = pop,
+            rain = rain,
+            showers = showers,
+            snow = snowfall,
+            uvIndex = uvIndex,
+            windSpeed = windSpeed,
+            windDirection = windDirection,
+            gustSpeed = gustSpeed,
+            pressure = pressure,
+            visibility = visibility,
+            humidity = humidity,
+            wmoCode = wmoCodes,
+            isDay = isDay,
+            sunrises = sunrises,
+            sunsets = sunsets
+        )
+        val forecast = ForecastConverter().fromData(forecastData, toUnits = imperial)
+        assertTrue(forecast.temperature.all { it.temperature.unit == imperial.temperature })
+        assertTrue(forecast.feelsLike.all { it.temperature.unit == imperial.temperature })
+        assertTrue(forecast.dewPoint.all { it.temperature.unit == imperial.temperature })
+        assertTrue(forecast.precipitation.all { it.precipitation.unit == imperial.precipitation })
+        assertTrue(forecast.wind.all { it.wind.speed.unit == imperial.windSpeed })
+        assertTrue(forecast.gust.all { it.speed.unit == imperial.windSpeed })
+        assertTrue(forecast.pressure.all { it.pressure.unit == imperial.pressure })
+        assertTrue(forecast.visibility.all { it.visibility.unit == imperial.visibility })
+    }
+
+    @Test(expected = Exception::class)
+    fun `throws when data does not match`() = runTest {
+        val units = Units.Default
+        val time = listOf(
+            unixEpochStart,
+            unixEpochStart.plus(1, ChronoUnit.HOURS)
+        )
+        val sunrises = listOf<LocalDateTime>()
+        val sunsets = listOf<LocalDateTime>()
+        val temperature = listOf(
+            Temperature.fromDegreesCelsius(0.0),
+            Temperature.fromDegreesCelsius(0.0)
+        )
+        val feelsLikeTemperature = listOf(
+            Temperature.fromDegreesCelsius(0.0),
+            Temperature.fromDegreesCelsius(0.0)
+        )
+        val dewPointTemperature = listOf(
+            Temperature.fromDegreesCelsius(0.0),
+            Temperature.fromDegreesCelsius(0.0)
+        )
+        val pop = listOf(
+            Pop(value = 0.0),
+            Pop(value = 0.0)
+        )
+        val isDay = listOf(true, false)
+        val wmoCodes = listOf(1, 2)
+        val rain = listOf(
+            Rain.fromMillimeters(1.0),
+            Rain.fromMillimeters(1.0)
+        )
+        val showers = listOf(
+            Showers.Zero,
+            Showers.Zero
+        )
+        val snowfall = listOf(
+            Snow.Zero,
+            Snow.Zero
+        )
+        val uvIndex = listOf(
+            UvIndex(1),
+            UvIndex(1)
+        )
+        val windSpeed = listOf(
+            WindSpeed.fromMetersPerSecond(1.0),
+            WindSpeed.fromMetersPerSecond(1.0)
+        )
+        val windDirection = listOf(
+            WindDirection(10.0),
+            WindDirection(10.0)
+        )
+        val gustSpeed = listOf(
+            WindSpeed.fromMetersPerSecond(10.0),
+            WindSpeed.fromMetersPerSecond(10.0)
+        )
+        val pressure = listOf(
+            Pressure.fromHectopascal(1000.0),
+            Pressure.fromHectopascal(1000.0)
+        )
+        val visibility = listOf(
+            Visibility.fromMeters(1000.0)
+            // Mismatch, should throw
+        )
+        val humidity = listOf(
+            Humidity(80.0),
+            Humidity(80.0)
+        )
+        val forecastData = ForecastData(
+            timestamp = Instant.MIN,
+            times = time,
+            temperature = temperature,
+            feelsLikeTemperature = feelsLikeTemperature,
+            dewPointTemperature = dewPointTemperature,
+            pop = pop,
+            rain = rain,
+            showers = showers,
+            snow = snowfall,
+            uvIndex = uvIndex,
+            windSpeed = windSpeed,
+            windDirection = windDirection,
+            gustSpeed = gustSpeed,
+            pressure = pressure,
+            visibility = visibility,
+            humidity = humidity,
+            wmoCode = wmoCodes,
+            isDay = isDay,
+            sunrises = sunrises,
+            sunsets = sunsets
+        )
+        ForecastConverter().fromData(forecastData, units)
+    }
+}
