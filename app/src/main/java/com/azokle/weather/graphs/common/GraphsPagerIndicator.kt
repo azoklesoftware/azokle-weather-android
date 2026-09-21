@@ -12,31 +12,37 @@
 
 package com.azokle.weather.graphs.common
 
-import androidx.compose.foundation.background
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.azokle.weather.R
 import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
 import com.azokle.weather.common.capitalize
+import com.azokle.weather.common.clayClickable
+import com.azokle.weather.common.clayContainer
 import com.azokle.weather.common.rememberAppLocale
 import com.azokle.weather.common.rememberDateTimeFormatter
 import java.time.LocalDate
@@ -49,15 +55,78 @@ fun GraphsPagerIndicator(
     modifier: Modifier = Modifier
 ) {
     val formatter = rememberDateTimeFormatter(ofPattern = R.string.date_time_pattern_dow)
-    ScrollableTabRow(selectedTabIndex = selected, modifier = modifier) {
+    val scrollState = rememberScrollState()
+
+    LaunchedEffect(selected) {
+        if (state.isNotEmpty() && selected in state.indices) {
+            val approxItemWidthPx = 72 * 3 // approx density dp to px
+            val targetScroll = (selected * approxItemWidthPx) - (approxItemWidthPx * 1.5).toInt()
+            scrollState.animateScrollTo(targetScroll.coerceAtLeast(0))
+        }
+    }
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .horizontalScroll(scrollState)
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         state.forEachIndexed { idx, date ->
-            Tab(
-                selected = idx == selected,
-                onClick = { onClick(date) },
-                unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                text = { Text(formatter.format(date).capitalize(rememberAppLocale())) },
-                icon = { Text(text = "${date.dayOfMonth}") }
+            val isSelected = idx == selected
+            val dayOfWeek = formatter.format(date).capitalize(rememberAppLocale())
+            val dayOfMonth = "${date.dayOfMonth}"
+
+            val textColor by animateColorAsState(
+                targetValue = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                label = "DateTextColor"
             )
+
+            val containerModifier = if (isSelected) {
+                Modifier.clayContainer(
+                    surfaceColor = AppTheme.colors.claySurface,
+                    shape = ClayDefaults.ShapeMedium,
+                    elevation = ClayDefaults.ElevationMedium,
+                    highlightColor = AppTheme.colors.clayHighlight,
+                    innerShadowColor = AppTheme.colors.clayInnerShadow
+                )
+            } else {
+                Modifier
+                    .clip(ClayDefaults.ShapeMedium)
+                    .clayClickable(onClick = { onClick(date) })
+            }
+
+            Box(
+                modifier = containerModifier
+                    .width(64.dp)
+                    .height(60.dp)
+                    .then(
+                        if (isSelected) Modifier
+                            .clip(ClayDefaults.ShapeMedium)
+                            .clayClickable(onClick = { onClick(date) })
+                        else Modifier
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = dayOfWeek,
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                        color = textColor
+                    )
+                    Text(
+                        text = dayOfMonth,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.SemiBold,
+                        color = textColor
+                    )
+                }
+            }
         }
     }
 }
@@ -69,31 +138,24 @@ fun GraphsPagerIndicatorSkeleton(
 ) {
     Row(
         modifier = modifier
-            .padding(start = 52.dp)
-            .wrapContentWidth(unbounded = true, align = Alignment.Start)
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        repeat(6) {
+        repeat(5) {
             Box(
                 modifier = Modifier
-                    .height(IntrinsicSize.Max)
-                    .width(90.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Tab(
-                    selected = false,
-                    onClick = {},
-                    enabled = false,
-                    text = { Text("") },
-                    icon = { Text("") },
-                    modifier = Modifier.alpha(0f)
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .background(shape = MaterialTheme.shapes.small, color = color.value)
-                )
-            }
+                    .width(64.dp)
+                    .height(60.dp)
+                    .clayContainer(
+                        surfaceColor = color.value,
+                        shape = ClayDefaults.ShapeMedium,
+                        elevation = ClayDefaults.ElevationLow,
+                        highlightColor = AppTheme.colors.clayHighlight,
+                        innerShadowColor = AppTheme.colors.clayInnerShadow
+                    )
+            )
         }
     }
 }

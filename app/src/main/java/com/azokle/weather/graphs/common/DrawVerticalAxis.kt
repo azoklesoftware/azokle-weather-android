@@ -25,9 +25,10 @@ fun DrawScope.drawVerticalAxis(
         val frac = i / steps.toFloat()
         val y = size.height - args.bottomGutter - ((size.height - args.topGutter - args.bottomGutter) * frac)
         drawLine(
-            color = args.axisColor,
+            color = args.axisColor.copy(alpha = 0.20f),
             start = Offset(args.startGutter, y),
-            end = Offset(x, y)
+            end = Offset(x, y),
+            strokeWidth = args.axisWidth
         )
         onStepDrawn(frac, x, y)
     }

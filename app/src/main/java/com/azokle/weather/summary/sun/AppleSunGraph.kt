@@ -26,12 +26,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.azokle.weather.common.AppTheme
 import java.time.LocalTime
 import kotlin.math.PI
 import kotlin.math.sin
+
+import androidx.compose.ui.draw.drawWithCache
 
 @Composable
 fun AppleSunGraph(
@@ -40,64 +44,91 @@ fun AppleSunGraph(
     sunset: LocalTime,
     modifier: Modifier = Modifier
 ) {
-    Canvas(modifier) {
-        val width = size.width
-        val height = size.height
+    val dayColor = AppTheme.colors.accentWarm
+    val nightColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.35f)
+    val horizonColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f)
+    val sunColor = Color(0xFFFFB300)
 
-        fun calcX(time: LocalTime): Float =
-            ((time.toSecondOfDay() / 60f) / 1440) * width
-
-        fun calcAngle(x: Float): Float =
-            ((x / width) * 2 * PI + (PI / 2)).toFloat()
-
-        fun calcY(angle: Float): Float =
-            sin(angle) * (height / 2f) + height / 2f
-
-        val sunriseX = calcX(sunrise)
-        val sunsetX = calcX(sunset)
-        val sunriseY = calcY(calcAngle(sunriseX))
-        val beforeDay = Path()
-        val day = Path()
-        val afterDay = Path()
-        for (xInt in 0..width.toInt()) {
-            val x = xInt.toFloat()
-            val angle = calcAngle(x)
-            val y = calcY(angle)
-            val path = if (y > sunriseY) {
-                if (x <= sunriseX) {
-                    beforeDay
-                } else {
-                    afterDay
-                }
-            } else {
-                day
+    Canvas(
+        modifier = modifier.drawWithCache {
+            val width = size.width
+            val height = size.height
+            if (width <= 0f || height <= 0f) {
+                return@drawWithCache onDrawBehind {}
             }
-            path.run {
-                if (isEmpty) moveTo(x, y)
-                else lineTo(x, y)
+
+            fun calcX(time: LocalTime): Float =
+                ((time.toSecondOfDay() / 60f) / 1440f) * width
+
+            fun calcAngle(x: Float): Float =
+                ((x / width) * 2 * PI + (PI / 2)).toFloat()
+
+            fun calcY(angle: Float): Float =
+                sin(angle) * (height / 2.2f) + height / 2f
+
+            val sunriseX = calcX(sunrise)
+            val sunsetX = calcX(sunset)
+            val sunriseY = calcY(calcAngle(sunriseX))
+
+            val beforeDay = Path()
+            val day = Path()
+            val afterDay = Path()
+
+            val step = 6f
+            var x = 0f
+            while (x <= width) {
+                val angle = calcAngle(x)
+                val y = calcY(angle)
+                val path = if (y > sunriseY) {
+                    if (x <= sunriseX) beforeDay else afterDay
+                } else {
+                    day
+                }
+                path.run {
+                    if (isEmpty) moveTo(x, y) else lineTo(x, y)
+                }
+                x += step
+            }
+
+            val horizonPathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 6f), 0f)
+            val beforeDayStroke = Stroke(width = 2.5f)
+            val dayStroke = Stroke(width = 3f)
+
+            onDrawBehind {
+                // Draw horizon line
+                drawLine(
+                    color = horizonColor,
+                    start = Offset(x = 0f, y = sunriseY),
+                    end = Offset(x = width, y = sunriseY),
+                    strokeWidth = 1.5f,
+                    pathEffect = horizonPathEffect
+                )
+
+                // Draw trajectory paths
+                drawPath(beforeDay, color = nightColor, style = beforeDayStroke)
+                drawPath(day, color = dayColor, style = dayStroke)
+                drawPath(afterDay, color = nightColor, style = beforeDayStroke)
+
+                // Draw current sun position
+                val nowX = calcX(now)
+                val nowAngle = calcAngle(nowX)
+                val nowY = calcY(nowAngle)
+
+                // Outer glow aura
+                drawCircle(
+                    color = sunColor.copy(alpha = 0.25f),
+                    radius = 10f,
+                    center = Offset(nowX, nowY)
+                )
+                // Main sun orb
+                drawCircle(
+                    color = sunColor,
+                    radius = 5f,
+                    center = Offset(nowX, nowY)
+                )
             }
         }
-
-        drawPath(beforeDay, color = Color.Black, style = Stroke(2f))
-        drawPath(day, color = Color.White, style = Stroke(2f))
-        drawPath(afterDay, color = Color.Black, style = Stroke(2f))
-        drawLine(
-            Color.White,
-            start = Offset(x = 0f, y = sunriseY),
-            end = Offset(x = width, y = sunriseY)
-        )
-
-        /*val nowX = calcX(
-            now,
-            wrt = when {
-                now < sunrise -> sunriseX
-                now < sunset -> sunsetX
-                else -> width
-            }
-        )
-        val nowY = calcY(calcAngle(calcY(nowX)))
-        drawCircle(color = Color.Red, radius = 4f, center = Offset(nowX, nowY))*/
-    }
+    ) { }
 }
 
 @Preview
@@ -112,28 +143,12 @@ private fun AppleSunGraphPreview() {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             AppleSunGraph(
-                now = LocalTime.of(5, 31),
-                sunrise = LocalTime.of(5, 30),
-                sunset = LocalTime.of(20, 30),
+                now = LocalTime.of(12, 30),
+                sunrise = LocalTime.of(6, 0),
+                sunset = LocalTime.of(18, 30),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp)
-            )
-            AppleSunGraph(
-                now = LocalTime.of(12, 31),
-                sunrise = LocalTime.of(5, 30),
-                sunset = LocalTime.of(20, 30),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
-            )
-            AppleSunGraph(
-                now = LocalTime.of(12, 31),
-                sunrise = LocalTime.of(5, 30),
-                sunset = LocalTime.of(20, 30),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                    .height(60.dp)
             )
         }
     }

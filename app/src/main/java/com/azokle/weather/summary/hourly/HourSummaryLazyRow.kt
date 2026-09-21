@@ -17,12 +17,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -37,6 +37,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
+import com.azokle.weather.common.clayClickable
+import com.azokle.weather.common.clayContainer
 import com.azokle.weather.condition.Condition
 import com.azokle.weather.pop.Pop
 import com.azokle.weather.sun.SunEvent
@@ -51,30 +54,39 @@ fun HourSummaryLazyRow(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Surface(
-        shape = MaterialTheme.shapes.medium,
-        tonalElevation = 1.dp,
-        onClick = onClick,
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            val density = LocalDensity.current
-            var dummyHeight by remember { mutableStateOf(0.dp) }
-            HourSummaryMaxHeightDummy(
-                modifier = Modifier
-                    .padding(vertical = contentPadding)
-                    .onSizeChanged { dummyHeight = with(density) { it.height.toDp() } }
+            .fillMaxWidth()
+            .clayClickable(onClick = onClick)
+            .clayContainer(
+                surfaceColor = AppTheme.colors.claySurface,
+                shape = ClayDefaults.ShapeLarge,
+                elevation = ClayDefaults.ElevationMedium,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
             )
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(24.dp),
-                contentPadding = PaddingValues(contentPadding),
-                modifier = Modifier.height(dummyHeight + contentPadding * 2)
-            ) {
-                items(state) {
-                    when (it) {
-                        is HourSummary.Weather -> WeatherHourSummary(it, Modifier.fillMaxHeight())
-                        is HourSummary.Sun -> SunHourSummary(it, Modifier.fillMaxHeight())
+    ) {
+        HourSummaryMaxHeightDummy(
+            modifier = Modifier.padding(vertical = contentPadding)
+        )
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = contentPadding),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            items(
+                items = state,
+                key = { item ->
+                    when (item) {
+                        is HourSummary.Weather -> "weather_${item.time}"
+                        is HourSummary.Sun -> "sun_${item.time}"
                     }
+                }
+            ) {
+                when (it) {
+                    is HourSummary.Weather -> WeatherHourSummary(it, Modifier.fillMaxHeight())
+                    is HourSummary.Sun -> SunHourSummary(it, Modifier.fillMaxHeight())
                 }
             }
         }
@@ -83,7 +95,17 @@ fun HourSummaryLazyRow(
 
 @Composable
 fun HourSummaryLazyRowSkeleton(color: State<Color>, modifier: Modifier = Modifier) {
-    Box(modifier.background(color = color.value, shape = MaterialTheme.shapes.medium)) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clayContainer(
+                surfaceColor = color.value,
+                shape = ClayDefaults.ShapeLarge,
+                elevation = ClayDefaults.ElevationMedium,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
+            )
+    ) {
         HourSummaryMaxHeightDummy(modifier = Modifier.padding(vertical = contentPadding))
     }
 }

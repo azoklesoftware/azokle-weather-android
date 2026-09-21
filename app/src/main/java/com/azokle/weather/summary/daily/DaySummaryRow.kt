@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -37,6 +36,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import com.azokle.weather.R
 import com.azokle.weather.common.AppTheme
 import com.azokle.weather.common.capitalize
+import com.azokle.weather.common.clayClickable
 import com.azokle.weather.common.rememberAppLocale
 import com.azokle.weather.common.rememberDateTimeFormatter
 import com.azokle.weather.condition.Condition
@@ -57,34 +58,10 @@ import com.azokle.weather.temperature.Temperature
 import com.azokle.weather.temperature.string
 import java.time.LocalDate
 
-private val roundedRadius = 12.dp
-private val squareRadius = 4.dp
-private val verticalPadding = 8.dp
-
-private val firstShape = RoundedCornerShape(
-    topStart = roundedRadius,
-    topEnd = roundedRadius,
-    bottomStart = squareRadius,
-    bottomEnd = squareRadius
-)
-
-private val lastShape = RoundedCornerShape(
-    topStart = squareRadius,
-    topEnd = squareRadius,
-    bottomStart = roundedRadius,
-    bottomEnd = roundedRadius
-)
-
-private val middleShape = RoundedCornerShape(size = squareRadius)
+private val verticalPadding = 10.dp
 
 enum class DaySummaryPosition {
     First, Middle, Last;
-
-    fun shape() = when (this) {
-        First -> firstShape
-        Middle -> middleShape
-        Last -> lastShape
-    }
 }
 
 @Composable
@@ -97,22 +74,20 @@ fun DaySummaryRow(
     modifier: Modifier = Modifier,
 ) {
     val formatter = rememberDateTimeFormatter(ofPattern = R.string.date_time_pattern_dow)
-    Surface(
-        shape = remember(position) { position.shape() },
-        tonalElevation = 1.dp,
-        onClick = onClick,
-        modifier = modifier,
+    Box(
+        modifier = modifier
+            .clayClickable(onClick = onClick)
+            .padding(vertical = verticalPadding, horizontal = 16.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
-            modifier = Modifier.padding(vertical = verticalPadding, horizontal = 16.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             DayAndPopMaxHeightDummy()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1.1f)
             ) {
                 DayAndPop(
                     day = {
@@ -133,19 +108,23 @@ fun DaySummaryRow(
                 Image(
                     painter = state.desc.image(),
                     contentDescription = null,
-                    modifier = Modifier.size(32.dp)
+                    modifier = Modifier.size(30.dp)
                 )
             }
             Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.weight(2f)
             ) {
-                CompositionLocalProvider(LocalTextStyle provides MaterialTheme.typography.titleMedium) {
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.SemiBold
+                    )
+                ) {
                     val maxTempWidth = rememberMaxTempWidth()
                     Text(
                         text = state.min.string(),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
                         style = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
                         modifier = Modifier.width(maxTempWidth)
                     )
@@ -159,6 +138,7 @@ fun DaySummaryRow(
                     )
                     Text(
                         text = state.max.string(),
+                        color = MaterialTheme.colorScheme.onSurface,
                         style = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
                         modifier = Modifier.width(maxTempWidth)
                     )
@@ -174,8 +154,11 @@ fun DaySummaryRowSkeleton(
     position: DaySummaryPosition,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier.background(color = color.value, shape = position.shape())) {
-        DayAndPopMaxHeightDummy(modifier = Modifier.padding(vertical = verticalPadding))
+    Box(
+        modifier = modifier
+            .padding(vertical = verticalPadding, horizontal = 16.dp)
+    ) {
+        DayAndPopMaxHeightDummy(modifier = Modifier.padding(vertical = 4.dp))
     }
 }
 
@@ -190,7 +173,9 @@ private fun DayAndPop(
         modifier = modifier
     ) {
         CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.titleMedium,
+            LocalTextStyle provides MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.Medium
+            ),
             content = day
         )
         pop?.let { it() }
@@ -247,36 +232,6 @@ private fun DaySummaryPreview() {
                     desc = Condition(wmoCode = 1, isDay = true)
                 ),
                 position = DaySummaryPosition.First,
-                onClick = {}
-            )
-            DaySummaryRow(
-                absMin = absoluteMin,
-                absMax = absoluteMax,
-                state = DaySummary(
-                    isToday = false,
-                    time = LocalDate.parse("2023-01-02"),
-                    tempNow = Temperature.fromDegreesCelsius(5.0),
-                    min = Temperature.fromDegreesCelsius(0.0),
-                    max = Temperature.fromDegreesCelsius(5.0),
-                    pop = Pop(15.0),
-                    desc = Condition(wmoCode = 51, isDay = true)
-                ),
-                position = DaySummaryPosition.Middle,
-                onClick = {}
-            )
-            DaySummaryRow(
-                absMin = absoluteMin,
-                absMax = absoluteMax,
-                state = DaySummary(
-                    isToday = false,
-                    time = LocalDate.parse("2023-01-03"),
-                    tempNow = Temperature.fromDegreesCelsius(9.0),
-                    min = Temperature.fromDegreesCelsius(7.0),
-                    max = Temperature.fromDegreesCelsius(15.0),
-                    pop = Pop(0.0),
-                    desc = Condition(wmoCode = 2, isDay = true)
-                ),
-                position = DaySummaryPosition.Last,
                 onClick = {}
             )
         }

@@ -12,16 +12,19 @@
 
 package com.azokle.weather.place.picker
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.azokle.weather.R
@@ -107,29 +111,31 @@ private fun SavedPlaces(
     Column(modifier) {
         Text(
             text = stringResource(id = R.string.place_picker_title_saved_places),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.padding(start = horizontalPadding, top = 24.dp)
+            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(start = horizontalPadding, top = 20.dp, bottom = 8.dp)
         )
         val places = state.places
         when {
             places.isEmpty() -> Text(
                 text = stringResource(R.string.place_picker_error_no_saved_places),
                 style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = horizontalPadding, top = 8.dp)
             )
 
-            else -> LazyColumn(modifier = Modifier.fillMaxSize()) {
-                itemsIndexed(places) { idx, item ->
+            else -> LazyColumn(
+                contentPadding = PaddingValues(horizontal = horizontalPadding, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(places) { item ->
                     SavedPlaceItem(
                         state = item,
                         onClick = { onPlaceClick(item.place) },
                         onLongClick = { deleteCandidate = item.place },
-                        modifier = Modifier
-                            .padding(horizontal = horizontalPadding, vertical = 16.dp)
-                            .fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth()
                     )
-                    if (idx != places.lastIndex) HorizontalDivider()
                 }
             }
         }
@@ -177,9 +183,9 @@ private fun SearchedPlaces(
     Column(modifier) {
         Text(
             text = stringResource(id = R.string.place_picker_title_search_results),
-            style = MaterialTheme.typography.titleSmall,
-            color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.padding(start = horizontalPadding, top = 24.dp)
+            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(start = horizontalPadding, top = 20.dp, bottom = 8.dp)
         )
         val places = state.places
         when {
@@ -203,26 +209,27 @@ private fun SearchedPlaces(
             }
 
             else -> {
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    itemsIndexed(places) { idx, item ->
+                LazyColumn(
+                    contentPadding = PaddingValues(horizontal = horizontalPadding, vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(places) { item ->
                         SearchedPlaceItem(
                             state = item,
                             onClick = { onPlaceClick(item) },
                             modifier = Modifier
-                                .padding(horizontal = horizontalPadding, vertical = 16.dp)
                                 .fillMaxWidth()
+                                .padding(vertical = 8.dp)
                         )
-                        HorizontalDivider()
                     }
                     item {
+                        Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             text = stringResource(id = R.string.credit_geocoding),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(
-                                horizontal = horizontalPadding,
-                                vertical = 16.dp
-                            )
+                            modifier = Modifier.padding(vertical = 8.dp)
                         )
                     }
                 }

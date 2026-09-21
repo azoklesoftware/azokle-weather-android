@@ -49,26 +49,17 @@ import com.azokle.weather.place.Place
 // As a workaround, all of these vals were copied verbatim from the library to make the horizontal
 // padding animation the same as the expanding animation of the SearchBar. When they add the ability
 // to specify padding of the collapsed full-screen search bar, this code should be removed.
-private object MotionTokens {
-    const val DurationLong4 = 600.0
-    const val DurationMedium3 = 350.0
-    const val DurationShort2 = 100.0
-    val EasingEmphasizedDecelerateCubicBezier = CubicBezierEasing(0.05f, 0.7f, 0.1f, 1.0f)
-}
-private const val AnimationEnterDurationMillis: Int = MotionTokens.DurationLong4.toInt()
-private const val AnimationExitDurationMillis: Int = MotionTokens.DurationMedium3.toInt()
-private const val AnimationDelayMillis: Int = MotionTokens.DurationShort2.toInt()
-private val AnimationEnterEasing = MotionTokens.EasingEmphasizedDecelerateCubicBezier
-private val AnimationExitEasing = CubicBezierEasing(0.0f, 1.0f, 0.0f, 1.0f)
+import androidx.compose.animation.core.FastOutSlowInEasing
+
+private const val AnimationEnterDurationMillis: Int = 250
+private const val AnimationExitDurationMillis: Int = 200
 private val AnimationEnterFloatSpec: FiniteAnimationSpec<Dp> = tween(
     durationMillis = AnimationEnterDurationMillis,
-    delayMillis = AnimationDelayMillis,
-    easing = AnimationEnterEasing,
+    easing = FastOutSlowInEasing,
 )
 private val AnimationExitFloatSpec: FiniteAnimationSpec<Dp> = tween(
     durationMillis = AnimationExitDurationMillis,
-    delayMillis = AnimationDelayMillis,
-    easing = AnimationExitEasing,
+    easing = FastOutSlowInEasing,
 )
 
 // endregion
@@ -89,11 +80,15 @@ fun PlacePickerSearchBar(
 ) {
     val focusRequester = remember { FocusRequester() }
     LaunchedEffect(active) {
-        if (active) focusRequester.requestFocus()
-        else focusRequester.freeFocus()
+        if (active) {
+            kotlinx.coroutines.delay(60)
+            focusRequester.requestFocus()
+        } else {
+            focusRequester.freeFocus()
+        }
     }
     val horizontalPadding by animateDpAsState(
-        targetValue = if (active) 0.dp else 24.dp,
+        targetValue = if (active) 0.dp else 16.dp,
         animationSpec = if (active) AnimationEnterFloatSpec else AnimationExitFloatSpec,
         label = "Search bar horizontal padding"
     )

@@ -106,90 +106,117 @@ private fun DrawScope.drawHorizontalAxisAndPlot(
     val iconSizeRound = iconSize.roundToInt()
     val hasSpaceFor12Icons = (size.width - args.startGutter - args.endGutter) - (iconSizeRound * 12) >= (12 * 2.dp.toPx())
     val iconY = ((args.topGutter / 2) - (iconSize / 2)).roundToInt()
-    val range = maxCelsius - minCelsius
-
-    val plotPath = Path()
-    val plotFillPath = Path()
-    fun movePlot(x: Float, y: Float) {
-        with(plotPath) { if (isEmpty) moveTo(x, y) else lineTo(x, y) }
-        with(plotFillPath) { if (isEmpty) moveTo(x, y) else lineTo(x, y) }
-    }
+    val range = (maxCelsius - minCelsius).coerceAtLeast(0.001)
 
     var minCenter: Pair<Offset, Temperature>? = null
     var maxCenter: Pair<Offset, Temperature>? = null
     var nowCenter: Offset? = null
-    var lastX = 0f
+    val pointOffsets = mutableListOf<Offset>()
 
     drawTimeAxis(
         measurer = measurer,
         args = args
     ) { i, x ->
-        // Temperature line
+        // Temperature point calculation
         val point = state.points.getOrNull(i) ?: return@drawTimeAxis
         val temp = point.temperature
         val tempC = temp.value.convertTo(Temperature.Unit.DegreesCelsius).value
         val y = ((1 - ((tempC - minCelsius) / range)) * (size.height - args.topGutter - args.bottomGutter)).toFloat() + args.topGutter
-        movePlot(x, y)
-        lastX = x
+        val offset = Offset(x, y)
+        pointOffsets.add(offset)
 
         // Min, max and now indicators are drawn after the plot so they're on top of it
-        if (temp.meta == GraphTemperature.Meta.Minimum) minCenter = Offset(x, y) to temp.value
-        if (temp.meta == GraphTemperature.Meta.Maximum) maxCenter = Offset(x, y) to temp.value
-        if (point.time.meta == GraphTime.Meta.Present) nowCenter = Offset(x, y)
+        if (temp.meta == GraphTemperature.Meta.Minimum) minCenter = offset to temp.value
+        if (temp.meta == GraphTemperature.Meta.Maximum) maxCenter = offset to temp.value
+        if (point.time.meta == GraphTime.Meta.Present) nowCenter = offset
 
         // Condition icons
         if (i % (if (hasSpaceFor12Icons) 2 else 3) == 1) {
             val iconX = x - (iconSize / 2)
-            val iconDrawable = AppCompatResources.getDrawable(context, point.condition.image(context, args.icons))!!
-            drawImage(
-                image = iconDrawable.toBitmap(width = iconSizeRound, height = iconSizeRound).asImageBitmap(),
-                dstOffset = IntOffset(iconX.roundToInt(), y = iconY),
-                dstSize = IntSize(width = iconSizeRound, height = iconSizeRound),
-            )
+            val iconDrawable = AppCompatResources.getDrawable(context, point.condition.image(context, args.icons))
+            iconDrawable?.let {
+                drawImage(
+                    image = it.toBitmap(width = iconSizeRound, height = iconSizeRound).asImageBitmap(),
+                    dstOffset = IntOffset(iconX.roundToInt(), y = iconY),
+                    dstSize = IntSize(width = iconSizeRound, height = iconSizeRound),
+                )
+            }
         }
     }
-    val plotBottom = size.height - args.bottomGutter
-    plotFillPath.lineTo(x = lastX, y = plotBottom)
-    plotFillPath.lineTo(x = args.startGutter, y = plotBottom)
-    plotFillPath.close()
-    val gradientStart = size.height - args.bottomGutter
-    val gradientEnd = args.topGutter
-    // Clip path makes sure the plot ends are within graph bounds
-    clipPath(
-        path = Path().apply {
-            addRect(
-                Rect(
-                    offset = Offset(x = args.startGutter, y = args.topGutter),
-                    size = Size(
-                        width = lastX - args.startGutter,
-                        height = size.height - args.topGutter - args.bottomGutter
+
+    if (pointOffsets.isNotEmpty()) {
+        val plotPath = Path()
+        val plotFillPath = Path()
+
+        plotPath.moveTo(pointOffsets[0].x, pointOffsets[0].y)
+        plotFillPath.moveTo(pointOffsets[0].x, pointOffsets[0].y)
+
+        for (i in 0 until pointOffsets.size - 1) {
+            val p0 = pointOffsets.getOrElse(i - 1) { pointOffsets[i] }
+            val p1 = pointOffsets[i]
+            val p2 = pointOffsets[i + 1]
+            val p3 = pointOffsets.getOrElse(i + 2) { pointOffsets[i + 1] }
+
+            val cp1x = p1.x + (p2.x - p0.x) / 6f
+            val cp1y = p1.y + (p2.y - p0.y) / 6f
+            val cp2x = p2.x - (p3.x - p1.x) / 6f
+            val cp2y = p2.y - (p3.y - p1.y) / 6f
+
+            plotPath.cubicTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y)
+            plotFillPath.cubicTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y)
+        }
+
+        val plotBottom = size.height - args.bottomGutter
+        val firstX = pointOffsets.first().x
+        val lastX = pointOffsets.last().x
+
+        plotFillPath.lineTo(x = lastX, y = plotBottom)
+        plotFillPath.lineTo(x = firstX, y = plotBottom)
+        plotFillPath.close()
+
+        val gradientStart = size.height - args.bottomGutter
+        val gradientEnd = args.topGutter
+
+        // Draw smooth gradient fill under the curve
+        drawPath(
+            plotFillPath,
+            brush = Brush.verticalGradient(
+                colors = plotColors.map { it.copy(alpha = args.plotFillAlpha) },
+                startY = gradientStart,
+                endY = gradientEnd
+            )
+        )
+
+        // Clip and draw the smooth curve line
+        clipPath(
+            path = Path().apply {
+                addRect(
+                    Rect(
+                        offset = Offset(x = args.startGutter, y = args.topGutter),
+                        size = Size(
+                            width = lastX - args.startGutter,
+                            height = size.height - args.topGutter - args.bottomGutter
+                        )
                     )
+                )
+            }
+        ) {
+            drawPath(
+                plotPath,
+                brush = Brush.verticalGradient(
+                    colors = plotColors,
+                    startY = gradientStart,
+                    endY = gradientEnd
+                ),
+                style = Stroke(
+                    width = args.plotWidth,
+                    join = StrokeJoin.Round,
+                    cap = StrokeCap.Round
                 )
             )
         }
-    ) {
-        drawPath(
-            plotPath,
-            brush = Brush.verticalGradient(
-                colors = plotColors,
-                startY = gradientStart,
-                endY = gradientEnd
-            ),
-            style = Stroke(
-                width = args.plotWidth,
-                join = StrokeJoin.Round,
-                cap = StrokeCap.Square
-            )
-        )
     }
-    drawPath(
-        plotFillPath,
-        brush = Brush.verticalGradient(
-            colors = plotColors.map { it.copy(alpha = args.plotFillAlpha) },
-            startY = gradientStart,
-            endY = gradientEnd
-        )
-    )
+
     minCenter?.let { (offset, temp) ->
         drawLabeledPoint(
             label = temp.string(context, args.numberFormat),

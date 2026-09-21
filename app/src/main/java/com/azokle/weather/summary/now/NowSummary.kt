@@ -16,15 +16,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -38,12 +37,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.azokle.weather.R
 import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
 import com.azokle.weather.common.HighLowText
 import com.azokle.weather.common.TextSkeleton
+import com.azokle.weather.common.clayContainer
 import com.azokle.weather.condition.Condition
 import com.azokle.weather.condition.image
 import com.azokle.weather.condition.string
@@ -53,7 +56,7 @@ import com.azokle.weather.temperature.string
 @Composable
 fun NowSummary(state: NowSummary, modifier: Modifier = Modifier) {
     NowSummary(
-        date = { Text(stringResource(id = R.string.date_time_now)) },
+        date = { Text(stringResource(id = R.string.date_time_now).uppercase()) },
         temperature = { Text(state.temp.string()) },
         icon = {
             Image(
@@ -91,47 +94,89 @@ fun NowSummary(
     modifier: Modifier = Modifier,
     date: (@Composable () -> Unit)? = null,
 ) {
-    Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = modifier) {
-        Column {
-            date?.let {
+    Box(
+        modifier = modifier
+            .clayContainer(
+                surfaceColor = AppTheme.colors.clayHeroSurface,
+                shape = ClayDefaults.ShapeHero,
+                elevation = ClayDefaults.ElevationHigh,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
+            )
+            .padding(horizontal = 24.dp, vertical = 20.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (date != null) {
+                    CompositionLocalProvider(
+                        LocalTextStyle provides MaterialTheme.typography.labelMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 1.2.sp
+                        ),
+                        LocalContentColor provides MaterialTheme.colorScheme.primary,
+                        content = date
+                    )
+                } else {
+                    Spacer(modifier = Modifier.width(1.dp))
+                }
                 CompositionLocalProvider(
-                    LocalTextStyle provides MaterialTheme.typography.titleMedium,
-                    LocalContentColor provides MaterialTheme.colorScheme.secondary,
-                    content = it
+                    LocalTextStyle provides MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurface,
+                    content = condition
                 )
             }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
             Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.height(IntrinsicSize.Min)
+                modifier = Modifier.fillMaxWidth()
             ) {
                 CompositionLocalProvider(
-                    LocalTextStyle provides MaterialTheme.typography.displayMedium,
+                    LocalTextStyle provides MaterialTheme.typography.displayLarge.copy(
+                        fontWeight = FontWeight.Black,
+                        letterSpacing = (-1.5).sp
+                    ),
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurface,
                     content = temperature
                 )
                 Box(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .aspectRatio(1f)
+                        .size(72.dp)
                 ) {
                     icon()
                 }
             }
-            CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.bodyLarge,
-                LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
-                content = highLow
-            )
-        }
-        Column(horizontalAlignment = Alignment.End) {
-            CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.bodyLarge,
-                content = condition
-            )
-            CompositionLocalProvider(
-                LocalTextStyle provides MaterialTheme.typography.bodyLarge,
-                LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
-                content = feelsLike
-            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Medium
+                    ),
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
+                    content = highLow
+                )
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Medium
+                    ),
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f),
+                    content = feelsLike
+                )
+            }
         }
     }
 }
@@ -147,7 +192,7 @@ fun NowSummarySkeleton(
             @Composable {
                 TextSkeleton(
                     color = color,
-                    shape = MaterialTheme.shapes.small,
+                    shape = ClayDefaults.ShapeSmall,
                     contentPadding = PaddingValues(vertical = 2.dp),
                     modifier = Modifier.width(64.dp)
                 )
@@ -156,24 +201,30 @@ fun NowSummarySkeleton(
         temperature = {
             TextSkeleton(
                 color = color,
-                shape = MaterialTheme.shapes.medium,
+                shape = ClayDefaults.ShapeMedium,
                 contentPadding = PaddingValues(vertical = 2.dp),
-                modifier = Modifier.width(160.dp)
+                modifier = Modifier.width(140.dp).height(54.dp)
             )
         },
-        icon = {},
+        icon = {
+            TextSkeleton(
+                color = color,
+                shape = ClayDefaults.ShapePill,
+                modifier = Modifier.size(64.dp)
+            )
+        },
         highLow = {
             TextSkeleton(
                 color = color,
-                shape = MaterialTheme.shapes.small,
+                shape = ClayDefaults.ShapeSmall,
                 contentPadding = PaddingValues(vertical = 2.dp),
-                modifier = Modifier.width(150.dp)
+                modifier = Modifier.width(100.dp)
             )
         },
         feelsLike = {
             TextSkeleton(
                 color = color,
-                shape = MaterialTheme.shapes.small,
+                shape = ClayDefaults.ShapeSmall,
                 contentPadding = PaddingValues(vertical = 2.dp),
                 modifier = Modifier.width(80.dp)
             )
@@ -181,9 +232,9 @@ fun NowSummarySkeleton(
         condition = {
             TextSkeleton(
                 color = color,
-                shape = MaterialTheme.shapes.small,
+                shape = ClayDefaults.ShapeSmall,
                 contentPadding = PaddingValues(vertical = 2.dp),
-                modifier = Modifier.width(64.dp)
+                modifier = Modifier.width(70.dp)
             )
         },
         modifier = modifier

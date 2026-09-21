@@ -13,13 +13,20 @@
 package com.azokle.weather.summary.daily
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
+import com.azokle.weather.common.clayContainer
 import java.time.LocalDate
 
 @Composable
@@ -28,20 +35,39 @@ fun DailySummaryColumn(
     onDayClick: (LocalDate) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = modifier) {
-        state.days.forEachIndexed { index, day ->
-            DaySummaryRow(
-                state = day,
-                absMin = state.minTemp,
-                absMax = state.maxTemp,
-                modifier = Modifier.fillMaxWidth(),
-                position = when (index) {
-                    0 -> DaySummaryPosition.First
-                    state.days.lastIndex -> DaySummaryPosition.Last
-                    else -> DaySummaryPosition.Middle
-                },
-                onClick = { onDayClick(day.time) }
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clayContainer(
+                surfaceColor = AppTheme.colors.claySurface,
+                shape = ClayDefaults.ShapeLarge,
+                elevation = ClayDefaults.ElevationMedium,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
             )
+            .padding(vertical = 8.dp)
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(0.dp)) {
+            state.days.forEachIndexed { index, day ->
+                DaySummaryRow(
+                    state = day,
+                    absMin = state.minTemp,
+                    absMax = state.maxTemp,
+                    modifier = Modifier.fillMaxWidth(),
+                    position = when (index) {
+                        0 -> DaySummaryPosition.First
+                        state.days.lastIndex -> DaySummaryPosition.Last
+                        else -> DaySummaryPosition.Middle
+                    },
+                    onClick = { onDayClick(day.time) }
+                )
+                if (index < state.days.lastIndex) {
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+            }
         }
     }
 }
@@ -52,17 +78,30 @@ fun DailySummaryColumnSkeleton(
     modifier: Modifier = Modifier,
     rows: Int = 7,
 ) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp), modifier = modifier) {
-        repeat(rows) {
-            DaySummaryRowSkeleton(
-                color = color,
-                position = when (it) {
-                    0 -> DaySummaryPosition.First
-                    rows - 1 -> DaySummaryPosition.Last
-                    else -> DaySummaryPosition.Middle
-                },
-                modifier = Modifier.fillMaxWidth()
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clayContainer(
+                surfaceColor = color.value,
+                shape = ClayDefaults.ShapeLarge,
+                elevation = ClayDefaults.ElevationMedium,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
             )
+            .padding(vertical = 8.dp)
+    ) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            repeat(rows) {
+                DaySummaryRowSkeleton(
+                    color = color,
+                    position = when (it) {
+                        0 -> DaySummaryPosition.First
+                        rows - 1 -> DaySummaryPosition.Last
+                        else -> DaySummaryPosition.Middle
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }

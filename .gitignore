@@ -3,12 +3,16 @@
 *.aar
 *.ap_
 *.aab
+/app/release/
 
 # Files for the ART/Dalvik VM
 *.dex
 
 # Java class files
 *.class
+
+# Kotlin compiler files
+.kotlin/
 
 # Generated files
 bin/

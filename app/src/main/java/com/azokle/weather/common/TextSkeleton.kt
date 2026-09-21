@@ -28,6 +28,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+
 @Composable
 fun TextSkeleton(
     color: State<Color>,
@@ -42,7 +45,10 @@ fun TextSkeleton(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .background(color = color.value, shape = shape)
+                .clip(shape)
+                .drawBehind {
+                    drawRect(color = color.value)
+                }
         )
     }
 }

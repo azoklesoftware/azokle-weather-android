@@ -24,6 +24,13 @@ data class AppColors(
     val showersColor: Color,
     val snowColor: Color,
     val precipitationColor: Color,
+    val claySurface: Color,
+    val claySurfaceVariant: Color,
+    val clayHighlight: Color,
+    val clayInnerShadow: Color,
+    val clayHeroSurface: Color,
+    val accentWarm: Color,
+    val accentCool: Color,
 ) {
     fun temperatureColors(fromCelsius: Double, toCelsius: Double): List<Color> =
         temperatureColors.slice(getIndexOfNearestColor(fromCelsius)..getIndexOfNearestColor(toCelsius))
@@ -43,6 +50,13 @@ data class AppColors(
             showersColor = Color(0xFF4DB6AC),
             snowColor = Color(0xFFE0E0E0),
             precipitationColor = Color(0xFF9575CD),
+            claySurface = Color(0xFF1E2430),
+            claySurfaceVariant = Color(0xFF262E3D),
+            clayHighlight = Color.White.copy(alpha = 0.15f),
+            clayInnerShadow = Color.Black.copy(alpha = 0.45f),
+            clayHeroSurface = Color(0xFF222B3A),
+            accentWarm = Color(0xFFFFB74D),
+            accentCool = Color(0xFF4FC3F7),
         )
 
         val ForLightTheme get() = AppColors(
@@ -53,6 +67,13 @@ data class AppColors(
             showersColor = Color(0xFF009688),
             snowColor = Color(0xFF9E9E9E),
             precipitationColor = Color(0xFF3F51B5),
+            claySurface = Color(0xFFEDF2F7),
+            claySurfaceVariant = Color(0xFFE2E8F0),
+            clayHighlight = Color.White.copy(alpha = 0.75f),
+            clayInnerShadow = Color(0xFF94A3B8).copy(alpha = 0.35f),
+            clayHeroSurface = Color(0xFFEBF3FC),
+            accentWarm = Color(0xFFFF9800),
+            accentCool = Color(0xFF0288D1),
         )
     }
 }
@@ -65,7 +86,14 @@ val LocalAppColors = staticCompositionLocalOf {
         showersColor = Color.Unspecified,
         snowColor = Color.Unspecified,
         precipitationColor = Color.Unspecified,
-        uvIndexColors = mapOf()
+        uvIndexColors = mapOf(),
+        claySurface = Color.Unspecified,
+        claySurfaceVariant = Color.Unspecified,
+        clayHighlight = Color.Unspecified,
+        clayInnerShadow = Color.Unspecified,
+        clayHeroSurface = Color.Unspecified,
+        accentWarm = Color.Unspecified,
+        accentCool = Color.Unspecified
     )
 }
 

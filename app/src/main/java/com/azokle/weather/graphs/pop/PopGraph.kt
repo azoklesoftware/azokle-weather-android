@@ -77,69 +77,100 @@ private fun DrawScope.drawHorizontalAxisAndPlot(
     args: GraphArgs,
 ) {
     val range = 100f
-    val plotPath = Path()
-    val plotFillPath = Path()
-    fun movePlot(x: Float, y: Float) {
-        with(plotPath) { if (isEmpty) moveTo(x, y) else lineTo(x, y) }
-        with(plotFillPath) { if (isEmpty) moveTo(x, y) else lineTo(x, y) }
-    }
-
     var nowCenter: Offset? = null
     var maxCenter: Pair<Offset, Pop>? = null
-    var lastX = 0f
+    val pointOffsets = mutableListOf<Offset>()
 
     drawTimeAxis(
         measurer = measurer,
         args = args
     ) { i, x ->
-        // Plot line
+        // Plot point calculation
         val point = state.points.getOrNull(i) ?: return@drawTimeAxis
         val pop = point.pop.value
         val minY = args.topGutter + args.axisWidth + (args.plotWidth / 2)
         val maxY = size.height - args.bottomGutter - args.axisWidth - (args.plotWidth / 2)
         val y = (((1 - (pop.value / range)) * (size.height - args.bottomGutter - args.topGutter)) + args.topGutter).toFloat().coerceIn(minY, maxY)
-        movePlot(x, y)
-        lastX = x
+        val offset = Offset(x, y)
+        pointOffsets.add(offset)
 
         // Max and now indicator are drawn after the plot so it's on top of it
-        if (point.pop.meta == GraphPop.Meta.Maximum) maxCenter = Offset(x, y) to point.pop.value
-        if (point.time.meta == GraphTime.Meta.Present) nowCenter = Offset(x, y)
+        if (point.pop.meta == GraphPop.Meta.Maximum) maxCenter = offset to point.pop.value
+        if (point.time.meta == GraphTime.Meta.Present) nowCenter = offset
     }
 
-    // Draw the plot line and fill under it
-    val plotBottom = size.height - args.bottomGutter
-    plotFillPath.lineTo(x = lastX, y = plotBottom)
-    plotFillPath.lineTo(x = args.startGutter, y = plotBottom)
-    plotFillPath.close()
-    // Clip path makes sure the plot ends are within graph bounds
-    clipPath(
-        path = Path().apply {
-            addRect(
-                Rect(
-                    offset = Offset(x = args.startGutter, y = args.topGutter),
-                    size = Size(
-                        width = lastX - args.startGutter,
-                        height = size.height - args.topGutter - args.bottomGutter
+    if (pointOffsets.isNotEmpty()) {
+        val plotPath = Path()
+        val plotFillPath = Path()
+
+        plotPath.moveTo(pointOffsets[0].x, pointOffsets[0].y)
+        plotFillPath.moveTo(pointOffsets[0].x, pointOffsets[0].y)
+
+        for (i in 0 until pointOffsets.size - 1) {
+            val p0 = pointOffsets.getOrElse(i - 1) { pointOffsets[i] }
+            val p1 = pointOffsets[i]
+            val p2 = pointOffsets[i + 1]
+            val p3 = pointOffsets.getOrElse(i + 2) { pointOffsets[i + 1] }
+
+            val cp1x = p1.x + (p2.x - p0.x) / 6f
+            val cp1y = p1.y + (p2.y - p0.y) / 6f
+            val cp2x = p2.x - (p3.x - p1.x) / 6f
+            val cp2y = p2.y - (p3.y - p1.y) / 6f
+
+            plotPath.cubicTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y)
+            plotFillPath.cubicTo(cp1x, cp1y, cp2x, cp2y, p2.x, p2.y)
+        }
+
+        val plotBottom = size.height - args.bottomGutter
+        val firstX = pointOffsets.first().x
+        val lastX = pointOffsets.last().x
+
+        plotFillPath.lineTo(x = lastX, y = plotBottom)
+        plotFillPath.lineTo(x = firstX, y = plotBottom)
+        plotFillPath.close()
+
+        val gradientStart = args.topGutter
+        val gradientEnd = size.height - args.bottomGutter
+
+        // Draw the fill under the smooth curve
+        drawPath(
+            plotFillPath,
+            brush = androidx.compose.ui.graphics.Brush.verticalGradient(
+                colors = listOf(
+                    plotColor.copy(alpha = args.plotFillAlpha),
+                    plotColor.copy(alpha = 0.08f)
+                ),
+                startY = gradientStart,
+                endY = gradientEnd
+            )
+        )
+
+        // Clip and draw the smooth curve line
+        clipPath(
+            path = Path().apply {
+                addRect(
+                    Rect(
+                        offset = Offset(x = args.startGutter, y = args.topGutter),
+                        size = Size(
+                            width = lastX - args.startGutter,
+                            height = size.height - args.topGutter - args.bottomGutter
+                        )
                     )
+                )
+            }
+        ) {
+            drawPath(
+                plotPath,
+                color = plotColor,
+                style = Stroke(
+                    width = args.plotWidth,
+                    join = StrokeJoin.Round,
+                    cap = StrokeCap.Round
                 )
             )
         }
-    ) {
-        drawPath(
-            plotPath,
-            color = plotColor,
-            style = Stroke(
-                width = args.plotWidth,
-                join = StrokeJoin.Round,
-                cap = StrokeCap.Square
-            )
-        )
     }
-    drawPath(
-        plotFillPath,
-        color = plotColor,
-        alpha = args.plotFillAlpha
-    )
+
     maxCenter?.let { (offset, pop) ->
         drawLabeledPoint(
             label = pop.string(context, args.numberFormat),

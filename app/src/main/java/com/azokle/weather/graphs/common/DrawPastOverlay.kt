@@ -15,21 +15,33 @@ package com.azokle.weather.graphs.common
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.unit.dp
 
 fun DrawScope.drawPastOverlay(
     nowX: Float,
     args: GraphArgs
 ) {
-    drawLine(
-        color = args.axisColor,
-        start = Offset(x = nowX, y = 0f),
-        end = Offset(x = nowX, y = size.height),
-        strokeWidth = 2f
-    )
+    // Translucent past area mask
     drawRect(
         color = args.pastOverlayColor,
-        topLeft = Offset.Zero,
-        size = Size(width = nowX, height = size.height)
+        topLeft = Offset(args.startGutter, args.topGutter),
+        size = Size(
+            width = (nowX - args.startGutter).coerceAtLeast(0f),
+            height = (size.height - args.topGutter - args.bottomGutter).coerceAtLeast(0f)
+        )
+    )
+    // Present time vertical line with subtle glow
+    drawLine(
+        color = args.pointCenterColor.copy(alpha = 0.25f),
+        start = Offset(x = nowX, y = args.topGutter),
+        end = Offset(x = nowX, y = size.height - args.bottomGutter),
+        strokeWidth = 3.dp.toPx()
+    )
+    drawLine(
+        color = args.pointCenterColor.copy(alpha = 0.8f),
+        start = Offset(x = nowX, y = args.topGutter),
+        end = Offset(x = nowX, y = size.height - args.bottomGutter),
+        strokeWidth = 1.dp.toPx()
     )
 }
 

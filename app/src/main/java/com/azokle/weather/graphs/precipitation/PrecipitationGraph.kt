@@ -110,14 +110,17 @@ private fun DrawScope.drawHorizontalAxisAndBars(
     val iconSizeRound = iconSize.roundToInt()
     val hasSpaceFor12Icons = (size.width - args.startGutter - args.endGutter) - (iconSizeRound * 12) >= (12 * 2.dp.toPx())
     val iconY = ((args.topGutter / 2) - (iconSize / 2)).roundToInt()
-    val range = max.value * 1.2f
+    val range = (max.value * 1.2f).coerceAtLeast(0.001)
 
     var nowX: Float? = null
+    val barWidth = 6.5.dp.toPx()
+    val cornerRadius = androidx.compose.ui.geometry.CornerRadius(barWidth / 2, barWidth / 2)
+    val barSpacing = 1.dp.toPx()
+
     drawTimeAxis(
         measurer = measurer,
         args = args
     ) { i, x ->
-        // Temperature line
         val point = state.points.getOrNull(i) ?: return@drawTimeAxis
         if (point.time.meta == GraphTime.Meta.Present) nowX = x
 
@@ -129,47 +132,59 @@ private fun DrawScope.drawHorizontalAxisAndBars(
         val showersHeight = ((showers.value / range) * (size.height - args.topGutter - args.bottomGutter)).toFloat()
         val snowHeight = ((snow.liquidValue / range) * (size.height - args.topGutter - args.bottomGutter)).toFloat()
 
-        val barSpacing = 1.dp.toPx()
-        val desiredBarWidth = 8.dp.toPx()
         val bottomOfGraph = size.height - args.bottomGutter
-        val topOfRain = bottomOfGraph - rainHeight
+        val barLeft = x - (barWidth / 2)
 
-        val barX = if (i == 0) x + desiredBarWidth / 4 else x
-        val barWidth = if (i == 0) desiredBarWidth / 2 else desiredBarWidth
-        drawLine(
-            brush = SolidColor(rainColor),
-            start = Offset(barX, bottomOfGraph),
-            end = Offset(barX, topOfRain),
-            strokeWidth = barWidth
-        )
+        // Draw Rain Bar
+        if (rainHeight > 0f) {
+            val topOfRain = bottomOfGraph - rainHeight
+            drawRoundRect(
+                color = rainColor,
+                topLeft = Offset(barLeft, topOfRain),
+                size = androidx.compose.ui.geometry.Size(barWidth, rainHeight),
+                cornerRadius = cornerRadius
+            )
+        }
 
-        val bottomOfShowers = topOfRain - if (rainHeight > 0) barSpacing else 0f
-        val topOfShowers = bottomOfShowers - showersHeight
-        drawLine(
-            brush = SolidColor(showersColor),
-            start = Offset(barX, bottomOfShowers),
-            end = Offset(barX, topOfShowers),
-            strokeWidth = barWidth
-        )
+        // Draw Showers Bar
+        if (showersHeight > 0f) {
+            val topOfRain = bottomOfGraph - rainHeight
+            val bottomOfShowers = topOfRain - if (rainHeight > 0f) barSpacing else 0f
+            val topOfShowers = bottomOfShowers - showersHeight
+            drawRoundRect(
+                color = showersColor,
+                topLeft = Offset(barLeft, topOfShowers),
+                size = androidx.compose.ui.geometry.Size(barWidth, showersHeight),
+                cornerRadius = cornerRadius
+            )
+        }
 
-        val bottomOfSnow = topOfShowers - if (rainHeight > 0 || showersHeight > 0) barSpacing else 0f
-        val topOfSnow = bottomOfSnow - snowHeight
-        drawLine(
-            brush = SolidColor(snowColor),
-            start = Offset(barX, bottomOfSnow),
-            end = Offset(barX, topOfSnow),
-            strokeWidth = barWidth
-        )
+        // Draw Snow Bar
+        if (snowHeight > 0f) {
+            val topOfRain = bottomOfGraph - rainHeight
+            val bottomOfShowers = topOfRain - if (rainHeight > 0f) barSpacing else 0f
+            val topOfShowers = bottomOfShowers - showersHeight
+            val bottomOfSnow = topOfShowers - if (rainHeight > 0f || showersHeight > 0f) barSpacing else 0f
+            val topOfSnow = bottomOfSnow - snowHeight
+            drawRoundRect(
+                color = snowColor,
+                topLeft = Offset(barLeft, topOfSnow),
+                size = androidx.compose.ui.geometry.Size(barWidth, snowHeight),
+                cornerRadius = cornerRadius
+            )
+        }
 
         // Condition icons
         if (i % (if (hasSpaceFor12Icons) 2 else 3) == 1) {
             val iconX = x - (iconSize / 2)
-            val iconDrawable = AppCompatResources.getDrawable(context, point.cond.image(context, args.icons))!!
-            drawImage(
-                image = iconDrawable.toBitmap(width = iconSizeRound, height = iconSizeRound).asImageBitmap(),
-                dstOffset = IntOffset(iconX.roundToInt(), y = iconY),
-                dstSize = IntSize(width = iconSizeRound, height = iconSizeRound),
-            )
+            val iconDrawable = AppCompatResources.getDrawable(context, point.cond.image(context, args.icons))
+            iconDrawable?.let {
+                drawImage(
+                    image = it.toBitmap(width = iconSizeRound, height = iconSizeRound).asImageBitmap(),
+                    dstOffset = IntOffset(iconX.roundToInt(), y = iconY),
+                    dstSize = IntSize(width = iconSizeRound, height = iconSizeRound),
+                )
+            }
         }
     }
 

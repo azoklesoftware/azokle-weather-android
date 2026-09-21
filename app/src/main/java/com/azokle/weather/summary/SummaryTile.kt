@@ -13,6 +13,7 @@
 package com.azokle.weather.summary
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +25,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
+import com.azokle.weather.common.clayClickable
+import com.azokle.weather.common.clayContainer
 
 @Composable
 fun SummaryTile(
@@ -40,7 +46,26 @@ fun SummaryTile(
     supportingValue: (@Composable () -> Unit)? = null,
 ) {
     BoxWithConstraints(modifier) {
-        val content = @Composable {
+        val minHeight = minWidth.coerceAtLeast(140.dp)
+        val clickModifier = if (onClick != null) {
+            Modifier.clayClickable(onClick = onClick)
+        } else {
+            Modifier
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = minHeight)
+                .then(clickModifier)
+                .clayContainer(
+                    surfaceColor = AppTheme.colors.claySurface,
+                    shape = ClayDefaults.ShapeMedium,
+                    elevation = ClayDefaults.ElevationMedium,
+                    highlightColor = AppTheme.colors.clayHighlight,
+                    innerShadowColor = AppTheme.colors.clayInnerShadow
+                )
+        ) {
             Column(
                 verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
@@ -49,47 +74,41 @@ fun SummaryTile(
             ) {
                 Column {
                     CompositionLocalProvider(
-                        LocalTextStyle provides MaterialTheme.typography.titleSmall,
-                        LocalContentColor provides MaterialTheme.colorScheme.secondary,
+                        LocalTextStyle provides MaterialTheme.typography.labelLarge.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            letterSpacing = 0.3.sp
+                        ),
+                        LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f),
                         content = label
                     )
+                    Spacer(modifier = Modifier.height(6.dp))
                     CompositionLocalProvider(
-                        LocalTextStyle provides MaterialTheme.typography.headlineMedium,
+                        LocalTextStyle provides MaterialTheme.typography.headlineMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        ),
+                        LocalContentColor provides MaterialTheme.colorScheme.onSurface,
                         content = value
                     )
                     supportingValue?.let {
+                        Spacer(modifier = Modifier.height(2.dp))
                         CompositionLocalProvider(
-                            LocalTextStyle provides MaterialTheme.typography.bodyLarge,
+                            LocalTextStyle provides MaterialTheme.typography.bodyMedium.copy(
+                                fontWeight = FontWeight.Medium
+                            ),
+                            LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
                             content = it
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 CompositionLocalProvider(
-                    LocalTextStyle provides MaterialTheme.typography.bodyMedium,
+                    LocalTextStyle provides MaterialTheme.typography.bodySmall.copy(
+                        fontWeight = FontWeight.Normal
+                    ),
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f),
                     content = bottom
                 )
             }
-        }
-        if (onClick != null) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = minWidth),
-                tonalElevation = 1.dp,
-                shape = MaterialTheme.shapes.medium,
-                onClick = onClick,
-                content = content
-            )
-        } else {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = minWidth),
-                tonalElevation = 1.dp,
-                shape = MaterialTheme.shapes.medium,
-                content = content
-            )
         }
     }
 }

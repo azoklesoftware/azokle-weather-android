@@ -12,15 +12,16 @@
 
 package com.azokle.weather.settings
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ripple
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
@@ -28,12 +29,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.State
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
 import com.azokle.weather.common.TextSkeleton
+import com.azokle.weather.common.clayClickable
+import com.azokle.weather.common.clayContainer
 
 @Composable
 fun PreferenceButton(
@@ -62,25 +68,35 @@ fun PreferenceButton(
 
 @Composable
 fun PreferenceButtonSkeleton(color: State<Color>) {
-    PreferenceButton(
-        title = {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .clayContainer(
+                surfaceColor = color.value,
+                shape = ClayDefaults.ShapeMedium,
+                elevation = ClayDefaults.ElevationLow,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
+            )
+            .padding(vertical = 16.dp, horizontal = 16.dp)
+    ) {
+        Column {
             TextSkeleton(
                 color = color,
-                shape = MaterialTheme.shapes.small,
+                shape = ClayDefaults.ShapeSmall,
                 contentPadding = PaddingValues(vertical = 2.dp),
                 modifier = Modifier.width(140.dp)
             )
-        },
-        value = {
+            Spacer(modifier = Modifier.height(4.dp))
             TextSkeleton(
                 color = color,
-                shape = MaterialTheme.shapes.small,
+                shape = ClayDefaults.ShapeSmall,
                 contentPadding = PaddingValues(vertical = 2.dp),
-                modifier = Modifier.width(160.dp)
+                modifier = Modifier.width(100.dp)
             )
-        },
-        onClick = null
-    )
+        }
+    }
 }
 
 @Composable
@@ -89,29 +105,44 @@ private fun PreferenceButton(
     value: @Composable () -> Unit,
     onClick: (() -> Unit)?
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
+    val clickModifier = if (onClick != null) {
+        Modifier.clayClickable(onClick = onClick)
+    } else Modifier
+
+    Box(
         modifier = Modifier
-            .then(
-                if (onClick != null) {
-                    Modifier.clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = ripple(),
-                        onClick = onClick
-                    )
-                } else Modifier
-            )
             .fillMaxWidth()
-            .padding(vertical = 12.dp, horizontal = 16.dp)
+            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .then(clickModifier)
+            .clayContainer(
+                surfaceColor = AppTheme.colors.claySurface,
+                shape = ClayDefaults.ShapeMedium,
+                elevation = ClayDefaults.ElevationLow,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
+            )
+            .padding(vertical = 14.dp, horizontal = 18.dp)
     ) {
-        CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.bodyLarge,
-            content = title
-        )
-        CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.bodyMedium,
-            LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
-            content = value
-        )
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurface,
+                    content = title
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                CompositionLocalProvider(
+                    LocalTextStyle provides MaterialTheme.typography.bodyMedium,
+                    LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
+                    content = value
+                )
+            }
+        }
     }
 }

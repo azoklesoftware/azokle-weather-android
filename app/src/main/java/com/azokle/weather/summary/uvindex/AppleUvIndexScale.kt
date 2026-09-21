@@ -31,11 +31,11 @@ import com.azokle.weather.uvindex.UvIndex
 @Composable
 fun AppleUvIndexScale(uvIndexNow: UvIndex, modifier: Modifier = Modifier) {
     val nowColor = MaterialTheme.colorScheme.onSurface
-    val nowOutlineColor = MaterialTheme.colorScheme.surfaceVariant
-    val nowOutlineThickness = with(LocalDensity.current) { 4.dp.toPx() }
+    val nowOutlineColor = MaterialTheme.colorScheme.surface
+    val nowOutlineThickness = with(LocalDensity.current) { 3.dp.toPx() }
     Canvas(
         modifier = Modifier
-            .height(6.dp)
+            .height(8.dp)
             .then(modifier)
             .clip(RoundedCornerShape(percent = 100))
             .background(Brush.horizontalGradient(colorStops = AppTheme.colors.uvIndexColorStops.toTypedArray()))
@@ -52,7 +52,7 @@ fun AppleUvIndexScale(uvIndexNow: UvIndex, modifier: Modifier = Modifier) {
         )
         drawCircle(
             color = nowOutlineColor,
-            radius = nowRadius,
+            radius = nowRadius + 1f,
             center = nowCenter,
             style = Stroke(width = nowOutlineThickness)
         )

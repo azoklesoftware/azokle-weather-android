@@ -58,10 +58,16 @@ fun SummaryDestination(
             else selectedPlace?.name ?: ""
         )
     }
+
+    LaunchedEffect(selectedPlace) {
+        if (selectedPlace != null) {
+            summaryVM.getSummary()
+        }
+    }
+
     LaunchedEffect(searchActive) {
         if (!searchActive) {
             searchQuery = selectedPlace?.name ?: ""
-            summaryVM.getSummary()
         } else {
             placePickerVM.getSavedPlaces()
         }

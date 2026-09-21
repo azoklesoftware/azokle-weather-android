@@ -12,24 +12,38 @@
 
 package com.azokle.weather.graphs.common
 
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.unit.dp
 
 fun DrawScope.drawPoint(
     center: Offset,
     args: GraphArgs
 ) {
+    val haloRadius = args.pointCenterRadius * 2.5f
     val outlineRadius = args.pointCenterRadius + (args.pointOutlineWidth / 2)
+    
+    // Soft outer glow / halo
+    drawCircle(
+        color = args.pointCenterColor.copy(alpha = 0.18f),
+        radius = haloRadius,
+        center = center,
+        style = Fill
+    )
+    // Outline ring
     drawCircle(
         color = args.pointOutlineColor,
         radius = outlineRadius,
         center = center,
         style = Stroke(width = args.pointOutlineWidth)
     )
+    // Center dot
     drawCircle(
         color = args.pointCenterColor,
         radius = args.pointCenterRadius,
@@ -61,15 +75,50 @@ private fun DrawScope.drawPointLabel(
     pointCenter: Offset,
     args: GraphArgs,
 ) {
-    val labelMeasured = measurer.measure(text, args.axisTextStyle.copy(color = args.pointLabelColor))
+    val labelMeasured = measurer.measure(
+        text = text,
+        style = args.axisTextStyle.copy(
+            color = args.pointLabelColor,
+            fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold
+        )
+    )
+    
+    val hPadding = 6.dp.toPx()
+    val vPadding = 2.dp.toPx()
+    val pillWidth = labelMeasured.size.width + (hPadding * 2)
+    val pillHeight = labelMeasured.size.height + (vPadding * 2)
+    val cornerRadius = CornerRadius(pillHeight / 2, pillHeight / 2)
+    
+    val pillX = (pointCenter.x - (pillWidth / 2)).coerceIn(
+        minimumValue = args.startGutter + args.textPaddingMinHorizontal,
+        maximumValue = size.width - args.endGutter - pillWidth - args.textPaddingMinHorizontal
+    )
+    val pillY = (pointCenter.y - pillHeight - args.pointTextPaddingBottom).coerceAtLeast(args.topGutter + 2.dp.toPx())
+    
+    // Pill background
+    drawRoundRect(
+        color = args.pointOutlineColor,
+        topLeft = Offset(pillX, pillY),
+        size = Size(pillWidth, pillHeight),
+        cornerRadius = cornerRadius,
+        style = Fill
+    )
+    
+    // Subtle pill border
+    drawRoundRect(
+        color = args.axisColor.copy(alpha = 0.25f),
+        topLeft = Offset(pillX, pillY),
+        size = Size(pillWidth, pillHeight),
+        cornerRadius = cornerRadius,
+        style = Stroke(width = 1.dp.toPx())
+    )
+    
+    // Text inside pill
     drawText(
         textLayoutResult = labelMeasured,
         topLeft = Offset(
-            x = (pointCenter.x - (labelMeasured.size.width / 2)).coerceIn(
-                minimumValue = args.startGutter + args.textPaddingMinHorizontal,
-                maximumValue = size.width - args.endGutter - labelMeasured.size.width - args.textPaddingMinHorizontal
-            ),
-            y = pointCenter.y - (labelMeasured.size.height) - args.pointTextPaddingBottom
+            x = pillX + hPadding,
+            y = pillY + vPadding
         )
     )
 }

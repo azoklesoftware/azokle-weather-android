@@ -13,7 +13,6 @@
 package com.azokle.weather.graphs
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +20,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -28,20 +28,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.azokle.weather.R
+import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
 import com.azokle.weather.common.TextSkeleton
+import com.azokle.weather.common.clayContainer
 import com.azokle.weather.graphs.common.GraphArgs
 import com.azokle.weather.graphs.common.GraphScreenSectionLabel
 import com.azokle.weather.graphs.pop.PopGraph
 import com.azokle.weather.graphs.precipitation.PrecipitationBullets
 import com.azokle.weather.graphs.precipitation.PrecipitationGraph
-import com.azokle.weather.graphs.precipitation.TodayPrecipitationBullets
 import com.azokle.weather.graphs.precipitation.PrecipitationTotal
+import com.azokle.weather.graphs.precipitation.TodayPrecipitationBullets
 import com.azokle.weather.graphs.temperature.TemperatureGraph
 import com.azokle.weather.graphs.temperature.TemperatureGraphSummary
 import com.azokle.weather.precipitation.MixedPrecipitation
@@ -49,8 +50,8 @@ import com.azokle.weather.summary.now.NowSummarySkeleton
 import com.azokle.weather.temperature.Temperature
 
 private const val graphAspectRatio = 4f / 3f
-private val contentPadding = PaddingValues(horizontal = 16.dp, vertical = 24.dp)
-private val verticalSpacing = 24.dp
+private val contentPadding = PaddingValues(horizontal = 16.dp, vertical = 20.dp)
+private val verticalSpacing = 20.dp
 private val graphLabelSpacing = 8.dp
 
 @Composable
@@ -79,57 +80,78 @@ fun EssentialGraphPage(
             )
         }
         item {
-            TemperatureGraph(
-                state = temperatureGraph,
-                absMinTemp = minTemp,
-                absMaxTemp = maxTemp,
-                args = temperatureArgs,
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(graphAspectRatio)
-                    .border(
-                        width = Dp.Hairline,
-                        shape = MaterialTheme.shapes.large,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    .clayContainer(
+                        surfaceColor = AppTheme.colors.claySurface,
+                        shape = ClayDefaults.ShapeLarge,
+                        elevation = ClayDefaults.ElevationMedium,
+                        highlightColor = AppTheme.colors.clayHighlight,
+                        innerShadowColor = AppTheme.colors.clayInnerShadow
                     )
-                    .clip(MaterialTheme.shapes.large)
-            )
-        }
-        item {
-            Column(verticalArrangement = Arrangement.spacedBy(graphLabelSpacing)) {
-                GraphScreenSectionLabel(stringResource(R.string.cond_screen_pop))
-                PopGraph(
-                    state = popGraph,
-                    args = popArgs,
+                    .padding(8.dp)
+            ) {
+                TemperatureGraph(
+                    state = temperatureGraph,
+                    absMinTemp = minTemp,
+                    absMaxTemp = maxTemp,
+                    args = temperatureArgs,
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(graphAspectRatio)
-                        .border(
-                            width = Dp.Hairline,
-                            shape = MaterialTheme.shapes.large,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        .clip(MaterialTheme.shapes.large)
                 )
             }
         }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(graphLabelSpacing)) {
-                GraphScreenSectionLabel(stringResource(R.string.cond_screen_precip))
-                PrecipitationGraph(
-                    state = precipGraph,
-                    max = precipMax,
-                    args = precipArgs,
+                GraphScreenSectionLabel(stringResource(R.string.cond_screen_pop))
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(graphAspectRatio)
-                        .border(
-                            width = Dp.Hairline,
-                            shape = MaterialTheme.shapes.large,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        .clayContainer(
+                            surfaceColor = AppTheme.colors.claySurface,
+                            shape = ClayDefaults.ShapeLarge,
+                            elevation = ClayDefaults.ElevationMedium,
+                            highlightColor = AppTheme.colors.clayHighlight,
+                            innerShadowColor = AppTheme.colors.clayInnerShadow
                         )
-                        .clip(MaterialTheme.shapes.large)
-                )
+                        .padding(8.dp)
+                ) {
+                    PopGraph(
+                        state = popGraph,
+                        args = popArgs,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(graphAspectRatio)
+                    )
+                }
+            }
+        }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(graphLabelSpacing)) {
+                GraphScreenSectionLabel(stringResource(R.string.cond_screen_precip))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clayContainer(
+                            surfaceColor = AppTheme.colors.claySurface,
+                            shape = ClayDefaults.ShapeLarge,
+                            elevation = ClayDefaults.ElevationMedium,
+                            highlightColor = AppTheme.colors.clayHighlight,
+                            innerShadowColor = AppTheme.colors.clayInnerShadow
+                        )
+                        .padding(8.dp)
+                ) {
+                    PrecipitationGraph(
+                        state = precipGraph,
+                        max = precipMax,
+                        args = precipArgs,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(graphAspectRatio)
+                    )
+                }
             }
         }
         item {
@@ -174,14 +196,20 @@ fun EssentialGraphPageLoadingIndicator(shimmerColor: State<Color>, modifier: Mod
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(graphAspectRatio)
-                    .background(shape = MaterialTheme.shapes.large, color = shimmerColor.value),
+                    .clayContainer(
+                        surfaceColor = shimmerColor.value,
+                        shape = ClayDefaults.ShapeLarge,
+                        elevation = ClayDefaults.ElevationMedium,
+                        highlightColor = AppTheme.colors.clayHighlight,
+                        innerShadowColor = AppTheme.colors.clayInnerShadow
+                    )
             )
         }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(graphLabelSpacing)) {
                 TextSkeleton(
                     color = shimmerColor,
-                    shape = MaterialTheme.shapes.small,
+                    shape = ClayDefaults.ShapeSmall,
                     style = MaterialTheme.typography.titleSmall,
                     modifier = Modifier.width(160.dp)
                 )
@@ -189,7 +217,13 @@ fun EssentialGraphPageLoadingIndicator(shimmerColor: State<Color>, modifier: Mod
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(graphAspectRatio)
-                        .background(shape = MaterialTheme.shapes.large, color = shimmerColor.value),
+                        .clayContainer(
+                            surfaceColor = shimmerColor.value,
+                            shape = ClayDefaults.ShapeLarge,
+                            elevation = ClayDefaults.ElevationMedium,
+                            highlightColor = AppTheme.colors.clayHighlight,
+                            innerShadowColor = AppTheme.colors.clayInnerShadow
+                        )
                 )
             }
         }

@@ -1,22 +1,11 @@
-<!--
-  ~ Copyright 2024 Azokle Private Limited
-  ~
-  ~ This file is part of Azokle Weather.
-  ~
-  ~ Azokle Weather is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-  ~
-  ~ Azokle Weather is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License along with Azokle Weather. If not, see <https://www.gnu.org/licenses/>.
-  -->
-
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960"
+    android:viewportWidth="256"
+    android:viewportHeight="256"
     android:tint="?attr/colorControlNormal">
+  <!-- Phosphor X Bold -->
   <path
       android:fillColor="@android:color/white"
-      android:pathData="M256,760L200,704L424,480L200,256L256,200L480,424L704,200L760,256L536,480L760,704L704,760L480,536L256,760Z"/>
+      android:pathData="M208.49,191.51a12,12 0,0 1,-17,17L128,145,64.49,208.49a12,12 0,0 1,-17,-17L111,128,47.51,64.49a12,12 0,0 1,17,-17L128,111l63.51,-63.52a12,12 0,0 1,17,17L145,128Z"/>
 </vector>

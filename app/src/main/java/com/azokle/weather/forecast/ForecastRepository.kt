@@ -25,6 +25,11 @@ class ForecastRepository(
     private val converter: ForecastConverter
 ) {
     private val coordsToMutex = mutableMapOf<Coordinates, Mutex>()
+    
+    // In-memory cache for converted forecast to eliminate redundant array transformations
+    private var lastData: ForecastData? = null
+    private var lastUnits: Units? = null
+    private var lastForecast: Forecast? = null
 
     suspend fun forecast(
         coords: Coordinates,
@@ -44,7 +49,22 @@ class ForecastRepository(
                 cached
             }
         }
-        return data?.let { converter.fromData(it, units) }
+        
+        val currentData = data ?: return null
+        
+        synchronized(this) {
+            if (lastData === currentData && lastUnits == units && lastForecast != null) {
+                return lastForecast
+            }
+        }
+        
+        val converted = converter.fromData(currentData, units)
+        synchronized(this) {
+            lastData = currentData
+            lastUnits = units
+            lastForecast = converted
+        }
+        return converted
     }
 
     private fun shouldUpdate(data: ForecastData?, updatePolicy: UpdatePolicy): Boolean =

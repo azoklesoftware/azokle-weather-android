@@ -1,22 +1,11 @@
-<!--
-  ~ Copyright 2024 Azokle Private Limited
-  ~
-  ~ This file is part of Azokle Weather.
-  ~
-  ~ Azokle Weather is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-  ~
-  ~ Azokle Weather is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License along with Azokle Weather. If not, see <https://www.gnu.org/licenses/>.
-  -->
-
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="20dp"
     android:height="20dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960"
+    android:viewportWidth="256"
+    android:viewportHeight="256"
     android:tint="?attr/colorControlNormal">
+  <!-- Phosphor Drop Fill -->
   <path
       android:fillColor="@android:color/white"
-      android:pathData="M508,742Q516,741 522,734.5Q528,728 528,718Q528,707 520,700Q512,693 501,695Q443,703 394.5,668Q346,633 337,573Q336,564 329.5,558Q323,552 314,552Q303,552 295.5,560Q288,568 290,579Q301,657 364,705Q427,753 508,742ZM480,864Q350,864 259,773Q168,682 168,552Q168,455 242.5,347Q317,239 480,96Q646,246 719,353Q792,460 792,552Q792,682 701,773Q610,864 480,864Z"/>
+      android:pathData="M174.63,65.37L128,18.75 81.37,65.37a66,66 0,1 0,93.26 0ZM128,212a50.06,50.06 0,0 1,-50,-50c0,-8.83 5,-23.51 14.65,-36.87a8,8 0,0 1,13 9.48C98.42,144.62 94,156.41 94,162a34,34 0,0 0,34 34,8 8,0 0,1 0,16Z"/>
 </vector>

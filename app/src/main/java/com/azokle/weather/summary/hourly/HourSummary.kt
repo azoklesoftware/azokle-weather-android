@@ -15,6 +15,8 @@ package com.azokle.weather.summary.hourly
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LocalContentColor
@@ -26,6 +28,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.azokle.weather.summary.PopAndDrop
 
@@ -43,19 +46,26 @@ fun HourSummary(
         modifier = modifier
     ) {
         CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.titleSmall,
+            LocalTextStyle provides MaterialTheme.typography.labelMedium.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
             LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant,
             content = time
         )
+        Spacer(modifier = Modifier.height(4.dp))
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(modifier = Modifier.size(32.dp)) { icon() }
+            Box(modifier = Modifier.size(34.dp)) { icon() }
             pop?.let { it() }
         }
+        Spacer(modifier = Modifier.height(4.dp))
         CompositionLocalProvider(
-            LocalTextStyle provides MaterialTheme.typography.titleMedium,
+            LocalTextStyle provides MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.Bold
+            ),
+            LocalContentColor provides MaterialTheme.colorScheme.onSurface,
             content = temperature
         )
     }

@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.drawText
+import androidx.compose.ui.unit.dp
 import java.time.LocalTime
 
 fun DrawScope.drawTimeAxis(
@@ -27,24 +28,24 @@ fun DrawScope.drawTimeAxis(
     for (i in 0..24) {
         val x = ((i.toFloat() / 24) * (size.width - args.endGutter - args.startGutter)) + args.startGutter
         fun drawTimeHelperLine(dashed: Boolean = true) {
+            val lineColor = if (dashed) args.axisColor.copy(alpha = 0.20f) else args.axisColor.copy(alpha = 0.35f)
             drawLine(
-                color = args.axisColor,
+                color = lineColor,
                 start = Offset(x, y = args.topGutter),
                 end = Offset(x, y = size.height - args.bottomGutter),
                 strokeWidth = args.axisWidth,
-                pathEffect = if (dashed) PathEffect.dashPathEffect(args.axisDashIntervals.toFloatArray()) else null
+                pathEffect = if (dashed) PathEffect.dashPathEffect(floatArrayOf(3.dp.toPx(), 3.dp.toPx())) else null
             )
         }
         if (i % 4 == 0) {
             val time = LocalTime.of(if (i == 24) 0 else i, 0)
             val label = measurer.measure(
                 args.axisTimeFormatter.format(time),
-                style = args.axisTextStyle
+                style = args.axisTextStyle.copy(color = args.axisColor.copy(alpha = 0.85f))
             )
             drawTimeHelperLine(dashed = i != 0 && i != 24)
             drawText(
                 textLayoutResult = label,
-                color = args.axisColor,
                 topLeft = Offset(
                     x = (x - (label.size.width / 2)).coerceIn(
                         minimumValue = args.startGutter + args.textPaddingMinHorizontal,

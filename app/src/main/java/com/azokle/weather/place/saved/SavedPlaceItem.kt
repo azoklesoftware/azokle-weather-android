@@ -17,18 +17,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.ripple
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -42,12 +44,15 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.azokle.weather.R
 import com.azokle.weather.common.AppTheme
+import com.azokle.weather.common.ClayDefaults
 import com.azokle.weather.common.HighLowText
+import com.azokle.weather.common.clayContainer
 import com.azokle.weather.common.rememberDateTimeFormatter
 import com.azokle.weather.condition.Condition
 import com.azokle.weather.condition.image
@@ -68,44 +73,57 @@ fun SavedPlaceItem(
     modifier: Modifier = Modifier
 ) {
     val hapticFeedback = LocalHapticFeedback.current
-    Column(
-        Modifier
+    val surfaceColor = if (state.selected) AppTheme.colors.clayHeroSurface else AppTheme.colors.claySurface
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clayContainer(
+                surfaceColor = surfaceColor,
+                shape = ClayDefaults.ShapeMedium,
+                elevation = ClayDefaults.ElevationLow,
+                highlightColor = AppTheme.colors.clayHighlight,
+                innerShadowColor = AppTheme.colors.clayInnerShadow
+            )
             .combinedClickable(
                 interactionSource = remember { MutableInteractionSource() },
-                indication = ripple(),
+                indication = null,
                 onClick = onClick,
                 onLongClick = {
                     hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                     onLongClick()
                 }
             )
-            .then(modifier)
+            .padding(horizontal = 16.dp, vertical = 14.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
-            PlaceName(
-                place = state.place.name,
-                selected = state.selected,
-                modifier = Modifier.weight(1f)
-            )
-            state.conditions?.let {
-                TemperatureAndCondition(
-                    temperature = it.temp,
-                    condition = it.condition
+        Column {
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                PlaceName(
+                    place = state.place.name,
+                    selected = state.selected,
+                    modifier = Modifier.weight(1f)
                 )
+                state.conditions?.let {
+                    TemperatureAndCondition(
+                        temperature = it.temp,
+                        condition = it.condition
+                    )
+                }
             }
-        }
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            CountryAndTime(
-                country = state.place.countryName ?: state.place.countryCode,
-                time = state.time,
-                modifier = Modifier.weight(1f)
-            )
-            state.conditions?.let {
-                HighLowText(
-                    high = it.maxTemp.string(),
-                    low = it.minTemp.string(),
-                    style = MaterialTheme.typography.bodyMedium
+            Spacer(modifier = Modifier.height(4.dp))
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                CountryAndTime(
+                    country = state.place.countryName ?: state.place.countryCode,
+                    time = state.time,
+                    modifier = Modifier.weight(1f)
                 )
+                state.conditions?.let {
+                    HighLowText(
+                        high = it.maxTemp.string(),
+                        low = it.minTemp.string(),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
             }
         }
     }
@@ -121,15 +139,18 @@ private fun PlaceName(
         if (selected) {
             Icon(
                 painter = painterResource(id = R.drawable.location_on),
+                tint = MaterialTheme.colorScheme.primary,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(end = 2.dp)
-                    .size(16.dp)
+                    .padding(end = 4.dp)
+                    .size(18.dp)
             )
         }
         Text(
             text = place,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontWeight = if (selected) FontWeight.Bold else FontWeight.SemiBold
+            ),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -149,13 +170,15 @@ private fun TemperatureAndCondition(
     ) {
         Text(
             text = temperature.string(),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.Bold
+            )
         )
+        Spacer(modifier = Modifier.width(4.dp))
         Image(
             painter = condition.image(),
             modifier = Modifier
-                .fillMaxHeight()
-                .aspectRatio(1f),
+                .size(28.dp),
             contentDescription = null
         )
     }
@@ -170,11 +193,12 @@ private fun CountryAndTime(
     BoxWithConstraints(modifier = modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             Text(
                 text = country,
                 style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.widthIn(
@@ -189,6 +213,7 @@ private fun CountryAndTime(
             Text(
                 text = formatter.format(time),
                 style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
             )
         }
@@ -199,12 +224,12 @@ private fun CountryAndTime(
 @Composable
 private fun SavedPlaceCardPreview() {
     AppTheme(darkTheme = true) {
-        Surface(tonalElevation = 3.dp) {
+        Surface {
             SavedPlaceItem(
                 state = SavedPlace(
                     place = Place(
                         name = "Osijek",
-                        countryName = "Croatia but very very very very very long long",
+                        countryName = "Croatia",
                         countryCode = "HR",
                         admin1 = "Osječko-baranjska",
                         location = Location(ZoneOffset.UTC, Coordinates(0.0, 0.0))
